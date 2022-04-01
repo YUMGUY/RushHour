@@ -1,4 +1,5 @@
 # RushHour
-chillenium repository for Joey and YUMGUY
+chillenium repository for Joey, Sam, and YUMGUY
 
 we chillin
+
