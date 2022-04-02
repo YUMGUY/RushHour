@@ -13,7 +13,7 @@ public class patternMatching : MonoBehaviour
     private void Awake()
     {
         print("yo this should be first");
-        textbox.text = "New Text";
+        textbox.text = "wasd";
     }
 
     private void OnEnable()
@@ -22,6 +22,10 @@ public class patternMatching : MonoBehaviour
         print("this should be second");
         textbox.gameObject.SetActive(true);
         compare.gameObject.SetActive(true);
+
+        // INSTEAD OF TEXT
+        // instantitate the sprite pattern object, prefabs with children that have the sprites with index followed
+
     }
 
     private void OnDisable()
@@ -60,11 +64,19 @@ public class patternMatching : MonoBehaviour
             {
                 compare.text += letter;
                 int count = compare.text.Length;
+
+                // CHANGE TO SPRITE MECHANICS
+                /* 
+                 SPRITE W TO SPRITE W PRESSED, instead of text string, we do sprite array
+                 */
                 if(compare.text[count - 1] != textbox.text[count - 1])
                 {
                     print("not pog");
                     compare.text = "";
                 }
+
+                // IMAGINE IF THERE WAS A SPRITE ARRAY
+
 
                 if(count == textbox.text.Length)
                 {
