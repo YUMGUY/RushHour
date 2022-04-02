@@ -5,7 +5,7 @@ using UnityEngine;
 public class Ingredient : MonoBehaviour
 {
     public float lowerScreenBounds = -10f;
-    public string ID = "Generic";
+    public string PrimaryID = "Generic";
 
     // Start is called before the first frame update
     void Start()

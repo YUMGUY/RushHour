@@ -29,8 +29,11 @@ public class DragAndDrop : MonoBehaviour
     public void OnMouseUp()
     {
         isDragging = false;
+        //ingredRb.WakeUp();
+        ingredRb.gravityScale = 1f;
         //If released, bounce up and freefall (with some rotation for fun)
-        ingredRb.AddForce(new Vector2(0, 300));
+        ingredRb.AddForce(new Vector2(0, 150));
+        //ingredRb.AddRelativeForce(new Vector2(0, 300));
         //ingredRb.AddTorque(400);
     }
 
