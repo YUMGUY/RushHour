@@ -216,13 +216,14 @@ GameObject:
   m_Component:
   - component: {fileID: 636613688}
   - component: {fileID: 636613687}
+  - component: {fileID: 636613689}
   m_Layer: 0
-  m_Name: Square
+  m_Name: Mixing Gameobject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &636613687
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -288,3 +289,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &636613689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 636613686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6251d3082cbcf254ca1d10b26b650638, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textbox: {fileID: 0}
+  compare: {fileID: 0}
