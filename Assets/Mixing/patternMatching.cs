@@ -64,7 +64,7 @@ public class patternMatching : MonoBehaviour
             {
                 compare.text += letter;
                 int count = compare.text.Length;
-
+                print(count);
                 // CHANGE TO SPRITE MECHANICS
                 /* 
                  SPRITE W TO SPRITE W PRESSED, instead of text string, we do sprite array
@@ -73,6 +73,7 @@ public class patternMatching : MonoBehaviour
                 {
                     print("not pog");
                     compare.text = "";
+                    break;
                 }
 
                 // IMAGINE IF THERE WAS A SPRITE ARRAY

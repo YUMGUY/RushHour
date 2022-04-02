@@ -22,7 +22,7 @@ public class juicingMechanics : MonoBehaviour
 
     public TextMeshProUGUI textMash;
 
-    
+    public GameObject backgroundMash;
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +34,7 @@ public class juicingMechanics : MonoBehaviour
         int index = Random.Range(0, mashiNPUTS.Length);
         playerRequiredInput = mashiNPUTS[index];
         textMash.text = playerRequiredInput.ToString().ToUpper();
+        backgroundMash.SetActive(true);
     }
 
     // Update is called once per frame
@@ -118,6 +119,8 @@ public class juicingMechanics : MonoBehaviour
         {
             currentFill = maxFill;
             print("hurray you finished");
+            backgroundMash.SetActive(false);
+            this.gameObject.SetActive(false);
         }
     }
 }
