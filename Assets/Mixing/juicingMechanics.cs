@@ -47,6 +47,9 @@ public class juicingMechanics : MonoBehaviour
 
         // CHANGE COLOR.GREEN TO
         image.color = Color.Lerp(Color.white, Color.green, .5f*image.fillAmount);
+
+        // GameObject currentDrink = FindGamobjectTag
+        // currentdrink.trasnform.scale = ping pong
     }
 
     public void Smashing(char letter)

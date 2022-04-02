@@ -53,13 +53,19 @@ public class GameHandler : MonoBehaviour
 
         // make this actually be correct transform later
         GameObject m = Instantiate(monsterPrefab, this.transform) as GameObject;
+
+        // CHANGE DONE BY TIMMY, test out 
+        m.transform.position = new Vector2(5f, 0);
         Monster monster = m.GetComponent<Monster>();
 
         queue = GetComponent<MonsterQueue>();
-        queue.insert(monster);
+        queue.insert(monster); 
+
+        // either in game manager or in Monster.cs, handle how monster will find a seat - Timmy ( rn i am doing code in Monster.cs for the finding the seat
 
 
         // currentDrink = Drink();
+        // static Gameobject currentDrink; getcomponent to get the current drink's script
         
     }
 
@@ -92,7 +98,7 @@ public class GameHandler : MonoBehaviour
             } 
         }
         queue.increaseAllTimeWaiting(Time.deltaTime);
-
+        
 
         // trigger mini game if awareness is over 100
         if (awareness >= 100)

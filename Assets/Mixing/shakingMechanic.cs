@@ -54,6 +54,8 @@ public class shakingMechanic : MonoBehaviour
         ReduceFillShake();
 
         imageShake.color = Color.Lerp(Color.white, Color.green, .5f*imageShake.fillAmount);
+
+        // shake left and right using rotation
        
     }
 
