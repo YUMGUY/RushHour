@@ -26,6 +26,8 @@ public class shakingMechanic : MonoBehaviour
 
     public TextMeshProUGUI textup;
     public TextMeshProUGUI textdown;
+
+    public GameObject shakingImage;
     void Start()
     {
         
@@ -41,6 +43,7 @@ public class shakingMechanic : MonoBehaviour
 
         textup.text = playerShakeUp.ToString().ToUpper();
         textdown.text = playerShakeDown.ToString().ToUpper();
+        shakingImage.SetActive(true);
     }
     // Update is called once per frame
     void Update()
@@ -61,7 +64,7 @@ public class shakingMechanic : MonoBehaviour
            
         {   
             textup.color = Color.red;
-            print("go up");
+            //print("go up");
             switch(up) {
                 case 't':
                     if(Input.GetKeyDown(KeyCode.T))
@@ -90,7 +93,7 @@ public class shakingMechanic : MonoBehaviour
         else if (shake == true)
         {
             textdown.color = Color.red;
-            print("shake is true");
+           // print("shake is true");
             switch(down)
             {
                 case 'g':
@@ -145,6 +148,8 @@ public class shakingMechanic : MonoBehaviour
         {
             currentFillShake = maxFillShake;
             print("hurray you finished shaking");
+
+            shakingImage.SetActive(false);
         }
     }
 }
