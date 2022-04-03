@@ -5,6 +5,7 @@ using UnityEngine;
 public class currDrink : MonoBehaviour
 {
     private List<GameObject> storedIngreds;
+    private bool addedLiquid = false;
 
     [Header("Current Ingredients")]
 
@@ -40,11 +41,8 @@ public class currDrink : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("Ingredient Added");
-        //if (collision.GetComponent<Ingredient> != null)
         try
         {
-            
-
             switch (collision.GetComponent<Ingredient>().PrimaryID)
             {
                 case "Eyeball":
@@ -58,7 +56,7 @@ public class currDrink : MonoBehaviour
                             case "Green":
                                 Eyeballs1 = 2;
                                 break;
-                            case "Brown":
+                            case "Purple":
                                 Eyeballs1 = 3;
                                 break;
                             default:
@@ -76,7 +74,7 @@ public class currDrink : MonoBehaviour
                             case "Green":
                                 Eyeballs2 = 2;
                                 break;
-                            case "Brown":
+                            case "Purple":
                                 Eyeballs2 = 3;
                                 break;
                             default:
@@ -94,7 +92,7 @@ public class currDrink : MonoBehaviour
                             case "Green":
                                 Eyeballs3 = 2;
                                 break;
-                            case "Brown":
+                            case "Purple":
                                 Eyeballs3 = 3;
                                 break;
                             default:
@@ -188,6 +186,7 @@ public class currDrink : MonoBehaviour
                 case "Liquid":
                     if (LiquidBase == 0)
                     {
+                        addedLiquid = true;
                         switch (collision.GetComponent<Ingredient>().SecondaryID)
                         {
                             case "Lava":
@@ -206,6 +205,7 @@ public class currDrink : MonoBehaviour
                                 LiquidBase = 0;
                                 break;
                         }
+                        
                     }
                     else
                     {
@@ -215,13 +215,38 @@ public class currDrink : MonoBehaviour
 
             }
         }
-        catch {
+        catch
+        {
             Debug.Log("Object added was not an ingredient");
         }
 
-        collision.gameObject.SetActive(false);
-        storedIngreds.Add(collision.gameObject);
 
+        if (!addedLiquid)
+        {
+            collision.gameObject.SetActive(false);
+            storedIngreds.Add(collision.gameObject);
+        }
+        else {
+            collision.GetComponent<DragAndDrop_Alt>().returnHome();
+        }
+        
+        
+
+    }
+
+    public void drinkExplosion() {
+        
+        
+        addedLiquid = false;
+        Eyeballs1 = 0; //0 = no eyes, 1 = blue eyes, 2 = green eyes, 3 = brown eyes
+        Eyeballs2 = 0;
+        Eyeballs3 = 0;
+        Gemstones = 0; //0 = no gems, 1 = pearls, 2 = diamonds, 3 = heart gems
+        Fruits = 0; //0 = no fruit, 1 = firefruit, 2 = icefruit, 3 = elecfruit
+        Fingers = false; //false = no finger
+        Hearts = false; //false = no hearts
+        Tentacles = false; //flase = no tentacles
+        LiquidBase = 0; //0 = empty glass, 1 = lava slime, 2 = blood, 3 = brainjuice, 4 = tonic water
     }
 
     public void clearDrink()
