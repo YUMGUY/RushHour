@@ -48,14 +48,15 @@ public class GameHandler : MonoBehaviour
 
         awarenessBar.fillAmount = 0;
 
+      
 
         // create first attendent and put them in queue
 
         // make this actually be correct transform later
-        GameObject m = Instantiate(monsterPrefab, this.transform) as GameObject;
+        GameObject m = Instantiate(monsterPrefab) as GameObject;
 
         // CHANGE DONE BY TIMMY, test out 
-        m.transform.position = new Vector2(5f, 0);
+        m.transform.position = new Vector2(3f, 0);
         Monster monster = m.GetComponent<Monster>();
 
         queue = GetComponent<MonsterQueue>();
@@ -72,8 +73,10 @@ public class GameHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         // add total game time
         totalGameTime += Time.deltaTime;
+        Debug.Log("Size:" + queue.getSize());
 
         // do updates in difficulty based on time
         if(gameMode == 0 && totalGameTime >= mediumIncrease * 60)

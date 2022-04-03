@@ -7,9 +7,14 @@ public class seatProperties : MonoBehaviour
     // Start is called before the first frame update
 
     public bool seatOpen;
-    void Start()
+
+    private void Awake()
     {
         seatOpen = true;
+    }
+    void Start()
+    {
+       
     }
 
     // Update is called once per frame
