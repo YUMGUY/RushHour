@@ -29,41 +29,41 @@ public class MonsterDrink : MonoBehaviour
     {
 
         // everything needs a liquor
-        LiquidBase = Random.Range(1, 4);
+        LiquidBase = Random.Range(1, 5);
         size++;
 
-        int orderSize = Random.Range(1, 4);
+        int orderSize = Random.Range(1, 5);
 
         while(size != orderSize)
         {
-            int randomSelection = Random.Range(0, 5);
+            int randomSelection = Random.Range(0, 6);
 
             if(randomSelection == 0)
             {
                 if(Eyeballs1 == 0)
                 {
-                    Eyeballs1 = Random.Range(1, 3);
+                    Eyeballs1 = Random.Range(1, 4);
                     size++;
                 } else if(Eyeballs2 == 0)
                 {
-                    Eyeballs2 = Random.Range(1, 3);
+                    Eyeballs2 = Random.Range(1, 4);
                     size++;
                 } else
                 {
-                    Eyeballs3 = Random.Range(0, 3);
+                    Eyeballs3 = Random.Range(0, 4);
                     size++;
                 }
             }
 
             else if(randomSelection == 1 && Gemstones == 0)
             {
-                Gemstones = Random.Range(1, 3);
+                Gemstones = Random.Range(1, 4);
                 size++;
             }
 
             else if (randomSelection == 2 && Fruits == 0)
             {
-                Fruits = Random.Range(1, 3);
+                Fruits = Random.Range(1, 4);
                 size++;
             }
 
@@ -86,7 +86,7 @@ public class MonsterDrink : MonoBehaviour
             }
         }
 
-        int mixingMethod = Random.Range(0, 2);
+        int mixingMethod = Random.Range(0, 3);
         switch(mixingMethod)
         {
             case 0:
@@ -97,7 +97,7 @@ public class MonsterDrink : MonoBehaviour
                 this.hasBeenShaken = true;
                 size++;
                 break;
-            default:
+            case 2:
                 this.hasBeenJuiced = true;
                 size++;
                 break;
