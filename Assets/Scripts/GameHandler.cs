@@ -64,7 +64,7 @@ public class GameHandler : MonoBehaviour
     void Update()
     {
         // check for key press
-        if(Input.GetKeyDown(KeyCode.E))
+        if(Input.GetKeyDown(KeyCode.Space))
         {
             compareDrink();
         }
