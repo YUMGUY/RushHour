@@ -18,6 +18,7 @@ public class GameHandler : MonoBehaviour
     public AudioSource easyMusic;
     public AudioSource hardMusic;
     public AudioSource talking;
+    public AudioSource happyGrunt;
 
     // UI control
     public Image awarenessBar;
@@ -148,6 +149,7 @@ public class GameHandler : MonoBehaviour
         } else
         {
             // slide to monster at position index
+            happyGrunt.Play();
             queue.remove(index);
             awareness -= reward;
             punishment = 5;
