@@ -25,8 +25,9 @@ public class DragAndDrop : MonoBehaviour
             if (Ingredient.transform.childCount > 0)
             {  //Verifies that ingredient has multiple types
                 ChildIngred = Ingredient.transform.GetChild(Random.Range(0, 3)).gameObject;
-
+                //Debug.Log("Abou to instantiate");
                 ingredInstance = Instantiate(ChildIngred, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+                //Debug.Log("Should have instantiated");
                 ingredRb = ingredInstance.GetComponent<Rigidbody2D>();
             }
             else

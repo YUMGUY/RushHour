@@ -50,8 +50,13 @@ public class currDrink : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetMouseButton(0))
+        {
+            Debug.Log("Holding Left Mouse Down");
+            cameraRef.GetComponent<MoveCamera>().canMove = false;
+        }
         if (Input.GetMouseButtonUp(0)) {
-
+            cameraRef.GetComponent<MoveCamera>().canMove = true;
             foreach (GameObject storedIngred in storedIngreds)
             {
                 Destroy(storedIngred.gameObject);
@@ -332,8 +337,11 @@ public class currDrink : MonoBehaviour
 
         if (!addedLiquid)
         {
+            collision.GetComponent<Ingredient>().addToDrink();
             collision.gameObject.SetActive(false);
             storedIngreds.Add(collision.gameObject);
+
+
         }
         else {
             collision.GetComponent<DragAndDrop_Alt>().returnHome();
