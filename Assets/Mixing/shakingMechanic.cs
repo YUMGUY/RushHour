@@ -28,6 +28,8 @@ public class shakingMechanic : MonoBehaviour
     public TextMeshProUGUI textdown;
 
     public GameObject shakingImage;
+
+    public MoveCamera movingCamera;
     void Start()
     {
         
@@ -44,6 +46,16 @@ public class shakingMechanic : MonoBehaviour
         textup.text = playerShakeUp.ToString().ToUpper();
         textdown.text = playerShakeDown.ToString().ToUpper();
         shakingImage.SetActive(true);
+
+
+        movingCamera.canMove = false;
+    }
+
+    // enable player to press shift again
+    private void OnDisable()
+    {
+        shakingImage.SetActive(false);
+        movingCamera.canMove = true;
     }
     // Update is called once per frame
     void Update()
@@ -152,6 +164,7 @@ public class shakingMechanic : MonoBehaviour
             print("hurray you finished shaking");
 
             shakingImage.SetActive(false);
+            this.gameObject.SetActive(false);
         }
     }
 }

@@ -23,6 +23,7 @@ public class juicingMechanics : MonoBehaviour
     public TextMeshProUGUI textMash;
 
     public GameObject backgroundMash;
+    public MoveCamera moveCameraMash;
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +36,15 @@ public class juicingMechanics : MonoBehaviour
         playerRequiredInput = mashiNPUTS[index];
         textMash.text = playerRequiredInput.ToString().ToUpper();
         backgroundMash.SetActive(true);
+
+        moveCameraMash.canMove = false;
+
+    }
+
+    private void OnDisable()
+    {
+        backgroundMash.SetActive(false);
+        moveCameraMash.canMove = true;
     }
 
     // Update is called once per frame

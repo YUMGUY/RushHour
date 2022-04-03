@@ -10,19 +10,28 @@ public class patternMatching : MonoBehaviour
     public Text compare;
     private bool flag = false;
 
+    public string[] patterns;
+
+    public MoveCamera movingCamera;
     private void Awake()
     {
-        print("yo this should be first");
-        textbox.text = "wasd";
+        //int index = Random.Range(0, patterns.Length);
+
+        //print("yo this should be first");
+        //textbox.text = patterns[index];
     }
 
     private void OnEnable()
     {
         // can be activated also by the make Drink function later on
-        print("this should be second");
+        int index = Random.Range(0, patterns.Length);
+
+      //  print("yo this should be first");
+        textbox.text = patterns[index];
+       // print("this should be second");
         textbox.gameObject.SetActive(true);
         compare.gameObject.SetActive(true);
-
+        movingCamera.canMove = false;
         // INSTEAD OF TEXT
         // instantitate the sprite pattern object, prefabs with children that have the sprites with index followed
 
@@ -31,6 +40,9 @@ public class patternMatching : MonoBehaviour
     private void OnDisable()
     {
         //textbox.text = "";
+        textbox.gameObject.SetActive(false);
+        compare.gameObject.SetActive(false);
+        movingCamera.canMove = true;
         compare.text = "";
         flag = false;
     }

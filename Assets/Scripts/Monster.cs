@@ -6,7 +6,7 @@ public class Monster : MonoBehaviour
 {
     // variables added by timmy
     public GameObject bar;
-    private GameObject barChair;
+    public GameObject barChair;
 
 
     public GameObject offscreen;
@@ -35,8 +35,8 @@ public class Monster : MonoBehaviour
     void Start()
     {
 
-        bar = GameObject.Find("makeshift bar");
-
+        //  bar = GameObject.Find("makeshift bar");
+        bar = GameObject.FindGameObjectWithTag("TheBar");
 
 
 
@@ -63,6 +63,8 @@ public class Monster : MonoBehaviour
     
     private void Update()
     {
+
+        // find nearest available chair
         if(foundChair == false)
         {
            for(int i = 0; i < bar.transform.childCount; ++i)
@@ -93,32 +95,18 @@ public class Monster : MonoBehaviour
             
            // if any chairs aren't found
         }
+        
+        if(foundChair == true)
+        {
+            moveTimer += Time.deltaTime;
+            // add a timer for how long the guy gonna stay there
+            this.transform.position = Vector2.Lerp(transform.position, barChair.transform.position, moveTimer / duration);
+        }
 
-
-        moveTimer += Time.deltaTime;
-
-        findMonsterSeat();
     }
     
     // find available seat at the bar
-    public void findMonsterSeat()
-    {
-   
-        
-        if(foundChair == true && !takenChair)
-
-        if(foundChair == true)
-
-        {
-            print(this.gameObject.transform.position);
-            moveTimer += Time.deltaTime;
-            print(barChair.name);
-            this.gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, barChair.transform.position, curve.Evaluate(moveTimer / duration));
-        }
-
-       
-    }
-
+ 
 
     public void moveOffScreen()
     {
