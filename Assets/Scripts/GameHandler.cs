@@ -48,13 +48,7 @@ public class GameHandler : MonoBehaviour
 
         // create first attendent and put them in queue
 
-        // make this actually be correct transform later
-        GameObject m = Instantiate(monsterPrefab, this.transform) as GameObject;
-
-        // CHANGE DONE BY TIMMY, test out 
-        m.transform.position = new Vector2(5f, 0);
-        Monster monster = m.GetComponent<Monster>();
-
+        Monster monster = createMonster();
         queue = GetComponent<MonsterQueue>();
         queue.insert(monster); 
 
@@ -70,7 +64,7 @@ public class GameHandler : MonoBehaviour
     void Update()
     {
         // check for key press
-        if(Input.GetKeyDown(KeyCode.E))
+        if(Input.GetKeyDown(KeyCode.Space))
         {
             compareDrink();
         }
@@ -158,6 +152,7 @@ public class GameHandler : MonoBehaviour
 
     public Monster createMonster()
     {
+        // TODO: fix transform
         GameObject m = Instantiate(monsterPrefab, this.transform) as GameObject;
         Monster monster = m.GetComponent<Monster>();
         if (gameMode == 1)
