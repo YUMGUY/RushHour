@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bar: {fileID: 0}
+  offscreen: {fileID: 0}
   foundChair: 0
   takenChair: 0
   findChairCooldown: 0
