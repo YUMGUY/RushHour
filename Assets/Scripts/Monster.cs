@@ -17,12 +17,20 @@ public class Monster : MonoBehaviour
     public int chairPosition;
 
     private float moveTimer = 0;
-    private float duration = 3f;
+
+    // hard code 5 seconds
+    private float duration = 5f;
     // Start is called before the first frame update
 
     private float timeWaiting;
+
     private int irritationFactor;
     private MonsterDrink monsterDrink;
+
+
+    // Drink drink
+    [SerializeField]
+    public AnimationCurve curve;
 
     void Start()
     {
@@ -33,6 +41,7 @@ public class Monster : MonoBehaviour
 
 
         timeWaiting = 0;
+        foundChair = false;
         // drink = Drink();
         // drink.randomizeKeys();
 
@@ -53,27 +62,38 @@ public class Monster : MonoBehaviour
 
     
     private void Update()
-    {   
-        // process of finding chair
+    {
         if(foundChair == false)
         {
            for(int i = 0; i < bar.transform.childCount; ++i)
            {
-                if(bar.transform.GetChild(i).GetComponent<seatProperties>().seatOpen == true)
+                if(bar.transform.GetChild(i).GetComponent<seatProperties>().seatOpen == true && bar.transform.GetChild(i).gameObject.activeInHierarchy == true)
                 {
                     // close the seat
                     barChair = bar.transform.GetChild(i).gameObject;
+
+                    // so that the other monsters won't take the seat
+                   
                     print("index is: " + i);
 
                     // for the queue - TIMMY
                     chairPosition = i;
+                   
+                    print(barChair.transform.position);
+                   
+
+                    barChair.GetComponent<seatProperties>().seatOpen = false;
                     foundChair = true;
+
+                    // find nearest available chair
                     break;
                 }
            }
 
+            
            // if any chairs aren't found
         }
+
 
         moveTimer += Time.deltaTime;
 
@@ -86,19 +106,19 @@ public class Monster : MonoBehaviour
    
         
         if(foundChair == true && !takenChair)
+
+        if(foundChair == true)
+
         {
-                transform.position = Vector3.Lerp(transform.position, barChair.transform.position, moveTimer/duration);
-
-                if(Vector2.Distance(transform.position, barChair.transform.position) <= .2f)
-                {
-
-                        takenChair = true;
-                }
+            print(this.gameObject.transform.position);
+            moveTimer += Time.deltaTime;
+            print(barChair.name);
+            this.gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, barChair.transform.position, curve.Evaluate(moveTimer / duration));
         }
+
        
-       
-        
     }
+
 
     public void moveOffScreen()
     {
@@ -124,4 +144,8 @@ public class Monster : MonoBehaviour
     {
         return monsterDrink;
     }
+
+    // find available seat at the bar
+  
+
 }

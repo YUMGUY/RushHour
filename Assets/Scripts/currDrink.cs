@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class currDrink : MonoBehaviour
 {
+    [SerializeField] ExplosionFlash _image = null;
+
     private List<GameObject> storedIngreds;
+    private bool addedLiquid = false;
+    public GameObject cameraRef;
 
     [Header("Current Ingredients")]
 
@@ -34,17 +38,17 @@ public class currDrink : MonoBehaviour
                 Destroy(storedIngred.gameObject);
             }
         }
-        
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            drinkExplosion();
+        }
+        Debug.Log(addedLiquid);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("Ingredient Added");
-        //if (collision.GetComponent<Ingredient> != null)
         try
         {
-            
-
             switch (collision.GetComponent<Ingredient>().PrimaryID)
             {
                 case "Eyeball":
@@ -58,7 +62,7 @@ public class currDrink : MonoBehaviour
                             case "Green":
                                 Eyeballs1 = 2;
                                 break;
-                            case "Brown":
+                            case "Purple":
                                 Eyeballs1 = 3;
                                 break;
                             default:
@@ -76,7 +80,7 @@ public class currDrink : MonoBehaviour
                             case "Green":
                                 Eyeballs2 = 2;
                                 break;
-                            case "Brown":
+                            case "Purple":
                                 Eyeballs2 = 3;
                                 break;
                             default:
@@ -94,7 +98,7 @@ public class currDrink : MonoBehaviour
                             case "Green":
                                 Eyeballs3 = 2;
                                 break;
-                            case "Brown":
+                            case "Purple":
                                 Eyeballs3 = 3;
                                 break;
                             default:
@@ -105,6 +109,7 @@ public class currDrink : MonoBehaviour
                     else
                     {
                         //ADDED TOO MANY EYEBALLS ; EXPLODE
+                        drinkExplosion();
                     }
                     break;
                 case "Gemstone":
@@ -129,6 +134,7 @@ public class currDrink : MonoBehaviour
                     else
                     {
                         //ADDED TOO MANY
+                        drinkExplosion();
                     }
                     break;
                 case "Fruit":
@@ -153,6 +159,7 @@ public class currDrink : MonoBehaviour
                     else
                     {
                         //ADDED TOO MANY
+                        drinkExplosion();
                     }
                     break;
                 case "Finger":
@@ -163,6 +170,7 @@ public class currDrink : MonoBehaviour
                     else
                     {
                         //ADDED TOO MANY
+                        drinkExplosion();
                     }
                     break;
                 case "Heart":
@@ -173,6 +181,7 @@ public class currDrink : MonoBehaviour
                     else
                     {
                         //ADDED TOO MANY
+                        drinkExplosion();
                     }
                     break;
                 case "Tentacle":
@@ -183,11 +192,14 @@ public class currDrink : MonoBehaviour
                     else
                     {
                         //ADDED TOO MANY
+                        drinkExplosion();
                     }
                     break;
                 case "Liquid":
+                    addedLiquid = true;
                     if (LiquidBase == 0)
                     {
+                        
                         switch (collision.GetComponent<Ingredient>().SecondaryID)
                         {
                             case "Lava":
@@ -206,26 +218,56 @@ public class currDrink : MonoBehaviour
                                 LiquidBase = 0;
                                 break;
                         }
+                        
                     }
                     else
                     {
                         //ADDED TOO MANY
+                        drinkExplosion();
+                        addedLiquid = true;
                     }
                     break;
 
             }
         }
-        catch {
+        catch
+        {
             Debug.Log("Object added was not an ingredient");
         }
 
-        collision.gameObject.SetActive(false);
-        storedIngreds.Add(collision.gameObject);
 
+        if (!addedLiquid)
+        {
+            collision.gameObject.SetActive(false);
+            storedIngreds.Add(collision.gameObject);
+        }
+        else {
+            collision.GetComponent<DragAndDrop_Alt>().returnHome();
+            addedLiquid = false;
+        }
+        
+        
+
+    }
+
+    public void drinkExplosion() {
+
+        _image.StartFlash(0.25f, Color.red);
+        if (cameraRef != null) {
+            try
+            {
+                cameraRef.GetComponent<ScreenShake>().TriggerShake();
+            }
+            catch {
+                Debug.Log("ERROR: The ScreenShake script needs to be attached to the camera obj.");
+            }
+        }
+        clearDrink();
     }
 
     public void clearDrink()
     {
+        addedLiquid = false;
         Eyeballs1 = 0; //0 = no eyes, 1 = blue eyes, 2 = green eyes, 3 = brown eyes
         Eyeballs2 = 0;
         Eyeballs3 = 0;
@@ -236,4 +278,5 @@ public class currDrink : MonoBehaviour
         Tentacles = false; //flase = no tentacles
         LiquidBase = 0; //0 = empty glass, 1 = lava slime, 2 = blood, 3 = brainjuice, 4 = tonic water
     }
+
 }

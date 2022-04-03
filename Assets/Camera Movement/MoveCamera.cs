@@ -9,10 +9,22 @@ public class MoveCamera : MonoBehaviour
     public Transform pointA;
     public Transform pointB;
 
+    private Vector3 vect = Vector3.zero;
     private bool originalscene = true;
+
+    private bool moveToScene2;
+    private bool moveToScene1;
+
+  
+
+    // particle system
+
     void Start()
     {
-        
+        moveToScene2 = false;
+        moveToScene1 = false;
+        originalscene = true;
+
     }
 
     // Update is called once per frame
@@ -20,14 +32,36 @@ public class MoveCamera : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.LeftShift)&& originalscene)
         {
-            this.transform.position = pointB.position;
-            originalscene = false;
+            moveToScene2 = true;
+            moveToScene1 = false;
+        }
+        
+        
+
+        if(moveToScene2 == true)
+        {
+            this.transform.position = Vector3.MoveTowards(this.transform.position, pointB.position, .5f);
+            if(transform.position.y <= pointB.position.y)
+            {
+                originalscene = false;
+            }
         }
 
-        else if(Input.GetKeyDown(KeyCode.LeftShift) && !originalscene)
+        if(Input.GetKeyDown(KeyCode.LeftShift) && !originalscene)
+            {
+            moveToScene1 = true;
+            moveToScene2 = false;
+           
+            }
+
+        if(moveToScene1 == true)
         {
-            this.transform.position = pointA.position;
-            originalscene = true;
+            this.transform.position = Vector3.MoveTowards(this.transform.position, pointA.position, .5f);
+            if (transform.position.y >= pointA.position.y)
+            {
+                originalscene = true;
+            }
         }
+        
     }
 }
