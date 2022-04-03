@@ -6,6 +6,7 @@ public class Ingredient : MonoBehaviour
 {
     public float lowerScreenBounds = -10f;
     public string PrimaryID = "Generic";
+    public string SecondaryID = "Generic";
 
     // Start is called before the first frame update
     void Start()
