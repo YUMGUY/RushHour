@@ -26,7 +26,7 @@ public class Monster : MonoBehaviour
 
     private int irritationFactor;
     private MonsterDrink monsterDrink;
-
+    
     
 
 
@@ -51,26 +51,16 @@ public class Monster : MonoBehaviour
         irritationFactor = 1;
 
         int spriteNumber = Random.Range(0, 50);
-        /*
-        if (spriteNumber <= 15) {
+        if (spriteNumber <= 25) {
             this.GetComponent<SpriteRenderer>().sprite = GameHandler.possibleSprites[0];
-        } else if (spriteNumber <= 25)
+        } else if (spriteNumber <= 40)
         {
             this.GetComponent<SpriteRenderer>().sprite = GameHandler.possibleSprites[1];
         }
-        else if (spriteNumber <= 35)
+        else
         {
             this.GetComponent<SpriteRenderer>().sprite = GameHandler.possibleSprites[2];
         }
-        else if (spriteNumber <= 45)
-        {
-            this.GetComponent<SpriteRenderer>().sprite = GameHandler.possibleSprites[3];
-        }
-        else
-        {
-            this.GetComponent<SpriteRenderer>().sprite = GameHandler.possibleSprites[4];
-        }
-        */
 
     }
 
