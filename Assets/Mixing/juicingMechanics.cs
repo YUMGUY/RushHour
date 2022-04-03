@@ -26,6 +26,8 @@ public class juicingMechanics : MonoBehaviour
     public MoveCamera moveCameraMash;
     public currDrink currentDrink;
 
+    public GameObject refToClearButton;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -135,7 +137,9 @@ public class juicingMechanics : MonoBehaviour
             currentFill = maxFill;
             currentDrink.hasBeenJuiced = true;
             print("hurray you finished");
-         
+
+            refToClearButton.gameObject.SetActive(false);
+
             this.gameObject.SetActive(false);
         }
     }
