@@ -6,6 +6,7 @@ public class DragAndDrop : MonoBehaviour
 {
     private bool isDragging;
     public GameObject Ingredient;
+    private GameObject ChildIngred;
     private Vector2 screenPosition;
     private Vector2 worldPosition;
     private GameObject ingredInstance;
@@ -20,21 +21,38 @@ public class DragAndDrop : MonoBehaviour
 
     public void OnMouseDown()
     {
-        //Instantiate the ingredient from that object
-        ingredInstance = Instantiate(Ingredient, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
-        ingredRb = ingredInstance.GetComponent<Rigidbody2D>();
-        isDragging = true;
+        if (Ingredient != null) {
+            if (Ingredient.transform.childCount > 0)
+            {  //Verifies that ingredient has multiple types
+                ChildIngred = Ingredient.transform.GetChild(Random.Range(0, 3)).gameObject;
+
+                ingredInstance = Instantiate(ChildIngred, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+                ingredRb = ingredInstance.GetComponent<Rigidbody2D>();
+            }
+            else
+            {
+                //Instantiate the ingredient from that object
+                ingredInstance = Instantiate(Ingredient, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+                ingredRb = ingredInstance.GetComponent<Rigidbody2D>();
+            }
+
+            isDragging = true;
+        }
+        
     }
 
     public void OnMouseUp()
     {
-        isDragging = false;
-        //ingredRb.WakeUp();
-        ingredRb.gravityScale = 1f;
-        //If released, bounce up and freefall (with some rotation for fun)
-        ingredRb.AddForce(new Vector2(0, 150));
-        //ingredRb.AddRelativeForce(new Vector2(0, 300));
-        //ingredRb.AddTorque(400);
+        if (Ingredient != null) {
+            isDragging = false;
+            //ingredRb.WakeUp();
+            ingredRb.gravityScale = 1f;
+            //If released, bounce up and freefall (with some rotation for fun)
+            ingredRb.AddForce(new Vector2(0, 150));
+            //ingredRb.AddRelativeForce(new Vector2(0, 300));
+            //ingredRb.AddTorque(400);
+        }
+
     }
 
     // Update is called once per frame
