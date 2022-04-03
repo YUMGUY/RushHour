@@ -9,6 +9,7 @@ public class GameHandler : MonoBehaviour
 
     private MonsterQueue queue;
     private float totalGameTime;
+    private float totalSuccessfulDrinks;
     private float awareness;
     private const float mediumIncrease = 3;
     private const float hardIncrease = 6;
@@ -31,7 +32,7 @@ public class GameHandler : MonoBehaviour
     private int reward = 10;
 
     // TODO:
-    // public PlayerDrink currentDriks
+    public currDrink currentDrink;
 
     // PREFABS
     public GameObject monsterPrefab;
@@ -68,24 +69,30 @@ public class GameHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // check for key press
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            compareDrink();
+        }
+
         // add total game time
         totalGameTime += Time.deltaTime;
 
         // do updates in difficulty based on time
-        if(gameMode == 0 && totalGameTime >= mediumIncrease * 60)
+        if (gameMode == 0 && totalSuccessfulDrinks >= 5)
         {
             gameMode = 1;
             Monster monster = createMonster();
             queue.insert(monster);
-            // TODO: Increase queue size by one
-        } else if(gameMode == 1 && totalGameTime >= hardIncrease * 60)
+
+        } else if(gameMode == 1 && totalSuccessfulDrinks >= 10)
         {
             gameMode = 2;
             easyMusic.Stop();
             hardMusic.Play();
             Monster monster = createMonster();
             queue.insert(monster);
-            // TODO: Increase queue size by one
+
         }
 
         // Do time based decreases to awareness
@@ -116,38 +123,38 @@ public class GameHandler : MonoBehaviour
 
     }
 
-    // compareDrink
-    /*use a int to keep track of the monster it matches
-     * public void compareDrink() {
-     * 
-     * int index = -1;
-     * for(int i = 0; i < queue.getSize(); i++) {
-     *      // compare using some equality method
-     * }
-     * if(i == -1) {
-     *    drink slides off counter
-     *    awareness += punishment;
-     *      punishment*=2;
-     * } else {
-     *      slide to monster at position i
-     *      
-     *      queue.removeAt(i);
-     *      
-     *      // create a new monster
-     *      Monster monster = createMonster();
-            queue.insert(monster);
-     *      
-     *      awareness -= reward;
-     *      punishment = 5;
-     * }
-     * 
-     *  reset the current drink values
-     * 
-     * 
-     * 
-     * 
-     * }
-     */
+    public void compareDrink()
+    {
+        int index = -1;
+        for(int i = 0; i < queue.getSize(); i++)
+        {
+            bool same = queue.getDrink(i).compareToCurrentDrink(currentDrink);
+            if(same)
+            {
+                index = i;
+                break;
+            }
+        }
+
+
+        // if the drink was not found
+        if(index == -1)
+        {
+            // animate off the bar
+            awareness += punishment;
+            punishment *= 2;
+
+        } else
+        {
+            // slide to monster at position index
+            queue.remove(index);
+            awareness -= reward;
+            punishment = 5;
+            totalSuccessfulDrinks++;
+        }
+
+        currentDrink.clearDrink();
+    }
 
     public Monster createMonster()
     {
@@ -162,6 +169,7 @@ public class GameHandler : MonoBehaviour
         {
             monster.setIrritationFactor(3);
         }
+        monster.setMonsterDrink(new MonsterDrink());
         return monster;
     }
 }

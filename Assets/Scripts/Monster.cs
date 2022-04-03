@@ -22,7 +22,7 @@ public class Monster : MonoBehaviour
 
     private float timeWaiting;
     private int irritationFactor;
-    // Drink drink
+    private MonsterDrink monsterDrink;
 
     void Start()
     {
@@ -61,6 +61,7 @@ public class Monster : MonoBehaviour
            {
                 if(bar.transform.GetChild(i).GetComponent<seatProperties>().seatOpen == true)
                 {
+                    // close the seat
                     barChair = bar.transform.GetChild(i).gameObject;
                     print("index is: " + i);
 
@@ -112,5 +113,15 @@ public class Monster : MonoBehaviour
     public void setIrritationFactor(int factor)
     {
         irritationFactor = factor;
+    }
+
+    public void setMonsterDrink(MonsterDrink md)
+    {
+        monsterDrink = md;
+    }
+
+    public MonsterDrink getMonsterDrink()
+    {
+        return monsterDrink;
     }
 }

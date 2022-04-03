@@ -61,4 +61,9 @@ public class MonsterQueue : MonoBehaviour
         return queue[index].getIrritationFactor();
     }
 
+    public MonsterDrink getDrink(int index)
+    {
+        return queue[index].getMonsterDrink();
+    }
+
 }
