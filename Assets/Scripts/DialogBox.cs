@@ -54,8 +54,13 @@ public class DialogBox : MonoBehaviour
     {
         setupIconSlots();
 
+    }
+
+    public void updateBubble(MonsterDrink order)
+    {
+        drinkOrder = order;
         // number we've already added to the speech bubble to keep track of position
-        numberInOrder = 0;
+        numberInOrder = 1;
 
         // set the correct size
         if (drinkOrder.size == 2)
@@ -185,7 +190,7 @@ public class DialogBox : MonoBehaviour
         }
 
         // FINGERS
-        if(drinkOrder.Fingers == true)
+        if (drinkOrder.Fingers == true)
         {
             // add finger icon
             iconSlots[numberInOrder].sprite = finger;
@@ -211,19 +216,19 @@ public class DialogBox : MonoBehaviour
 
         // LIQUID BASE
         if (drinkOrder.LiquidBase == 1)
-           {
+        {
             // add lava slime
             iconSlots[numberInOrder].sprite = lavaSlime;
             numberInOrder++;
-           }
+        }
         else if (drinkOrder.LiquidBase == 2)
-         {
+        {
             // add blood
             iconSlots[numberInOrder].sprite = blood;
             numberInOrder++;
         }
-         else if(drinkOrder.LiquidBase == 3)
-         {
+        else if (drinkOrder.LiquidBase == 3)
+        {
             // add brain juice
             iconSlots[numberInOrder].sprite = brainjuice;
             numberInOrder++;
@@ -236,7 +241,7 @@ public class DialogBox : MonoBehaviour
         }
 
         // Mixing Methods
-        if(drinkOrder.hasBeenJuiced)
+        if (drinkOrder.hasBeenJuiced)
         {
             iconSlots[numberInOrder].sprite = juiced;
             numberInOrder++;
@@ -253,7 +258,6 @@ public class DialogBox : MonoBehaviour
             iconSlots[numberInOrder].sprite = stirred;
             numberInOrder++;
         }
-
     }
 
     void setupIconSlots()
