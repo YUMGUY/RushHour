@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-public class QuitGame : MonoBehaviour
+public class SceneControllerLite : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -16,7 +18,8 @@ public class QuitGame : MonoBehaviour
         
     }
 
-    public void exitGame() { 
-        Application.Quit();
+    public void transitionToMain()
+    {
+        SceneManager.LoadScene(0);
     }
 }
