@@ -128,7 +128,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 6422085674583116018, guid: f549c25809963424595783462c66105b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -176,6 +176,7 @@ MonoBehaviour:
   lowerScreenBounds: -10
   PrimaryID: Fruit
   SecondaryID: Ice
+  addedToDrink: 0
 --- !u!58 &8231895860146721761
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -265,7 +266,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 1248475614767147607, guid: f549c25809963424595783462c66105b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -313,6 +314,7 @@ MonoBehaviour:
   lowerScreenBounds: -10
   PrimaryID: Fruit
   SecondaryID: Elec
+  addedToDrink: 0
 --- !u!58 &1813176223199545478
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -402,7 +404,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: -5321949957799140045, guid: f549c25809963424595783462c66105b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -450,6 +452,7 @@ MonoBehaviour:
   lowerScreenBounds: -10
   PrimaryID: Fruit
   SecondaryID: Fire
+  addedToDrink: 0
 --- !u!58 &7031229276228978968
 CircleCollider2D:
   m_ObjectHideFlags: 0

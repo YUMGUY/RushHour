@@ -4,14 +4,18 @@ using UnityEngine;
 
 public class ScreenShake : MonoBehaviour
 {
-    private float shakeDuration = 0f;
+    private float shakeDuration = -1f;
     private float shakeMag = 0.5f;
     private float dampingSpeed = 1.0f;
-    Vector3 initialPos;
+    Vector3 underBarPos;
+
+    public bool canExplode = true;
+
+    private bool triggerExplode = false;
 
     private void OnEnable()
     {
-        initialPos = transform.localPosition;
+        underBarPos = new Vector3 (transform.position.x, transform.position.y - 20, transform.position.z);
     }
 
     // Start is called before the first frame update
@@ -25,17 +29,19 @@ public class ScreenShake : MonoBehaviour
     {
         if (shakeDuration > 0)
         {
-            transform.localPosition = initialPos + Random.insideUnitSphere * shakeMag;
+            transform.localPosition = underBarPos + Random.insideUnitSphere * shakeMag;
 
             shakeDuration -= Time.deltaTime * dampingSpeed;
         }
-        else { 
-            shakeDuration = 0f;
-            transform.localPosition = initialPos;
+        else if (triggerExplode){ 
+            shakeDuration = -1f;
+            transform.localPosition = underBarPos;
+            triggerExplode = false;
         }
     }
 
     public void TriggerShake() {
+        triggerExplode = true;
         shakeDuration = 0.7f;
     }
 }

@@ -73,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 6166395394848519983, guid: 238bd79a01c295d468be782c4b890103, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -121,6 +121,7 @@ MonoBehaviour:
   lowerScreenBounds: -10
   PrimaryID: Heart
   SecondaryID: Generic
+  addedToDrink: 0
 --- !u!58 &6534847720184358869
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -73,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: -4080278737599844964, guid: 8f066db94f4cb424b90d39e2d38951ce, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -121,6 +121,7 @@ MonoBehaviour:
   lowerScreenBounds: -10
   PrimaryID: Gemstone
   SecondaryID: Pearl
+  addedToDrink: 0
 --- !u!58 &2625546027957511610
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -265,7 +266,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: -2890370699262637217, guid: 8f066db94f4cb424b90d39e2d38951ce, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -313,6 +314,7 @@ MonoBehaviour:
   lowerScreenBounds: -10
   PrimaryID: Gemstone
   SecondaryID: Diamond
+  addedToDrink: 0
 --- !u!58 &4017686261205647171
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -402,7 +404,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 5640320162214436903, guid: 8f066db94f4cb424b90d39e2d38951ce, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -450,6 +452,7 @@ MonoBehaviour:
   lowerScreenBounds: -10
   PrimaryID: Gemstone
   SecondaryID: Heart
+  addedToDrink: 0
 --- !u!58 &6689415406254466084
 CircleCollider2D:
   m_ObjectHideFlags: 0
