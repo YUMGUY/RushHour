@@ -50,7 +50,20 @@ public class MonsterQueue : MonoBehaviour
 
     public void remove(int index)
     {
+        queue[index].moveOffScreen();
+        Destroy(queue[index].gameObject);
         queue.RemoveAt(index);
+        size--;
+    }
+
+    public int getIrritationFactor(int index)
+    {
+        return queue[index].getIrritationFactor();
+    }
+
+    public MonsterDrink getDrink(int index)
+    {
+        return queue[index].getMonsterDrink();
     }
 
 }

@@ -223,4 +223,17 @@ public class currDrink : MonoBehaviour
         storedIngreds.Add(collision.gameObject);
 
     }
+
+    public void clearDrink()
+    {
+        Eyeballs1 = 0; //0 = no eyes, 1 = blue eyes, 2 = green eyes, 3 = brown eyes
+        Eyeballs2 = 0;
+        Eyeballs3 = 0;
+        Gemstones = 0; //0 = no gems, 1 = pearls, 2 = diamonds, 3 = heart gems
+        Fruits = 0; //0 = no fruit, 1 = firefruit, 2 = icefruit, 3 = elecfruit
+        Fingers = false; //false = no finger
+        Hearts = false; //false = no hearts
+        Tentacles = false; //flase = no tentacles
+        LiquidBase = 0; //0 = empty glass, 1 = lava slime, 2 = blood, 3 = brainjuice, 4 = tonic water
+    }
 }

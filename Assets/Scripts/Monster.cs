@@ -7,6 +7,9 @@ public class Monster : MonoBehaviour
     // variables added by timmy
     public GameObject bar;
     private GameObject barChair;
+
+
+    public GameObject offscreen;
     public bool foundChair;
     public bool takenChair;
     public float findChairCooldown;
@@ -16,8 +19,10 @@ public class Monster : MonoBehaviour
     private float moveTimer = 0;
     private float duration = 3f;
     // Start is called before the first frame update
+
     private float timeWaiting;
-    // Drink drink
+    private int irritationFactor;
+    private MonsterDrink monsterDrink;
 
     void Start()
     {
@@ -32,6 +37,8 @@ public class Monster : MonoBehaviour
         // drink.randomizeKeys();
 
         findChairCooldown = 0;
+        irritationFactor = 1;
+
     }
 
     public void increaseTimeWaiting(float additionalTime)
@@ -44,6 +51,7 @@ public class Monster : MonoBehaviour
         return timeWaiting;
     }
 
+    
     private void Update()
     {   
         // process of finding chair
@@ -53,6 +61,7 @@ public class Monster : MonoBehaviour
            {
                 if(bar.transform.GetChild(i).GetComponent<seatProperties>().seatOpen == true)
                 {
+                    // close the seat
                     barChair = bar.transform.GetChild(i).gameObject;
                     print("index is: " + i);
 
@@ -70,6 +79,7 @@ public class Monster : MonoBehaviour
 
         findMonsterSeat();
     }
+    
     // find available seat at the bar
     public void findMonsterSeat()
     {
@@ -88,5 +98,30 @@ public class Monster : MonoBehaviour
        
        
         
+    }
+
+    public void moveOffScreen()
+    {
+        transform.position = Vector3.Lerp(transform.position, offscreen.transform.position, moveTimer/duration);
+    }
+
+    public int getIrritationFactor()
+    {
+        return irritationFactor;
+    }
+
+    public void setIrritationFactor(int factor)
+    {
+        irritationFactor = factor;
+    }
+
+    public void setMonsterDrink(MonsterDrink md)
+    {
+        monsterDrink = md;
+    }
+
+    public MonsterDrink getMonsterDrink()
+    {
+        return monsterDrink;
     }
 }
