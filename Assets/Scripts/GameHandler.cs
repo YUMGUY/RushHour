@@ -19,6 +19,7 @@ public class GameHandler : MonoBehaviour
     public AudioSource hardMusic;
     public AudioSource talking;
     public AudioSource happyGrunt;
+    public AudioSource slide;
 
     // UI control
     public Image awarenessBar;
@@ -42,6 +43,12 @@ public class GameHandler : MonoBehaviour
     // TODO: Initialize sprite list
     public static List<Sprite> possibleSprites;
 
+    public GlassSlide glass;
+    public Transform offTheBar;
+
+    public DialogBox box1;
+
+
     void Start()
     {
         totalGameTime = 0;
@@ -53,8 +60,8 @@ public class GameHandler : MonoBehaviour
 
 
         // create first attendent and put them in queue
-
         Monster monster = createMonster();
+        //box1.drinkOrder = monster.getMonsterDrink();
         queue = GetComponent<MonsterQueue>();
         queue.insert(monster);
 
@@ -71,7 +78,7 @@ public class GameHandler : MonoBehaviour
     void Update()
     {
         // check for key press
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.E))
         {
             compareDrink();
         }
@@ -139,16 +146,18 @@ public class GameHandler : MonoBehaviour
 
 
         // if the drink was not found
+        slide.Play();
         if(index == -1)
         {
             // animate off the bar
-            currentDrink.glassBreaking.Play();
+            glass.setDestination(offTheBar);
             awareness += punishment;
             punishment *= 2;
 
         } else
         {
             // slide to monster at position index
+            glass.setDestination(queue.getMonsterTransform(index));
             happyGrunt.Play();
             queue.remove(index);
             awareness -= reward;

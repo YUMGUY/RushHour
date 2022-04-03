@@ -53,13 +53,16 @@ public class Monster : MonoBehaviour
         int spriteNumber = Random.Range(0, 50);
         if (spriteNumber <= 25) {
             this.GetComponent<SpriteRenderer>().sprite = GameHandler.possibleSprites[0];
-        } else if (spriteNumber <= 40)
+        } else if (spriteNumber <= 35)
         {
             this.GetComponent<SpriteRenderer>().sprite = GameHandler.possibleSprites[1];
         }
-        else
+        else if(spriteNumber <= 45)
         {
             this.GetComponent<SpriteRenderer>().sprite = GameHandler.possibleSprites[2];
+        } else
+        {
+            this.GetComponent<SpriteRenderer>().sprite = GameHandler.possibleSprites[3];
         }
 
     }

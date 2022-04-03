@@ -66,4 +66,9 @@ public class MonsterQueue : MonoBehaviour
         return queue[index].getMonsterDrink();
     }
 
+    public Transform getMonsterTransform(int index)
+    {
+        return queue[index].gameObject.transform;
+    }
+
 }
