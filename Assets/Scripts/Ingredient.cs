@@ -9,6 +9,7 @@ public class Ingredient : MonoBehaviour
     public string SecondaryID = "Generic";
 
     public bool addedToDrink = false;
+    public bool isBottle = false;
 
     // Start is called before the first frame update
     void Start()
@@ -33,7 +34,7 @@ public class Ingredient : MonoBehaviour
 
     private void OnBecameInvisible()
     {
-        if (!addedToDrink) {
+        if (!addedToDrink && !isBottle) {
             Debug.Log("Left camera");
             Destroy(gameObject);
         }
