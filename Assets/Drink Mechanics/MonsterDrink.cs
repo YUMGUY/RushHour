@@ -19,17 +19,68 @@ public class MonsterDrink : MonoBehaviour
     public bool Tentacles = false; //flase = no tentacles
     public int LiquidBase = 0; //0 = empty glass, 1 = lava slime, 2 = blood, 3 = brainjuice, 4 = tonic water
 
+    public int size = 0;
+
     public MonsterDrink()
     {
-        Eyeballs1 = Random.Range(0, 3);
-        Eyeballs2 = Random.Range(0, 3);
-        Eyeballs3 = Random.Range(0, 3);
-        Gemstones = Random.Range(0, 3);
-        Fruits = Random.Range(0, 3);
-        Fingers = Random.Range(0, 1) == 1 ? true : false;
-        Hearts = Random.Range(0, 1) == 1 ? true : false;
-        Tentacles = Random.Range(0, 1) == 1 ? true : false;
+
+        // everything needs a liquor
         LiquidBase = Random.Range(0, 3);
+        size++;
+
+        int orderSize = Random.Range(2, 5);
+
+        while(size != orderSize)
+        {
+            int randomSelection = Random.Range(0, 5);
+
+            if(randomSelection == 0)
+            {
+                if(Eyeballs1 == 0)
+                {
+                    Eyeballs1 = Random.Range(1, 3);
+                    size++;
+                } else if(Eyeballs2 == 0)
+                {
+                    Eyeballs2 = Random.Range(1, 3);
+                    size++;
+                } else
+                {
+                    Eyeballs3 = Random.Range(0, 3);
+                    size++;
+                }
+            }
+
+            else if(randomSelection == 1 && Gemstones == 0)
+            {
+                Gemstones = Random.Range(1, 3);
+                size++;
+            }
+
+            else if (randomSelection == 2 && Fruits == 0)
+            {
+                Fruits = Random.Range(1, 3);
+                size++;
+            }
+
+            else if (randomSelection == 3 && !Fingers)
+            {
+                Fingers = true;
+                size++;
+            }
+
+            else if (randomSelection == 4 && !Hearts)
+            {
+                Hearts = true;
+                size++;
+            }
+
+            else if (randomSelection == 4 && !Tentacles)
+            {
+                Tentacles = true;
+                size++;
+            }
+        }
     }
 
     public bool compareToCurrentDrink(currDrink drink)
