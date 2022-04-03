@@ -69,9 +69,9 @@ public class currDrink : MonoBehaviour
                 Destroy(storedIngred.gameObject);
             }
         }
-        /*if (Input.GetKeyDown(KeyCode.Space)) {
+        if (Input.GetKeyDown(KeyCode.Space)) {
             drinkExplosion();
-        }*/
+        }
         //Debug.Log(addedLiquid);
 
         if (LiquidBase == 0)
