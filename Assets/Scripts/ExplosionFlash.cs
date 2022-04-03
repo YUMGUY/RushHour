@@ -6,6 +6,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Image))]
 public class ExplosionFlash : MonoBehaviour
 {
+
     Image _image = null;
     Coroutine _currentFlashRoutine = null;
 
