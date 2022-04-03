@@ -27,6 +27,8 @@ public class Monster : MonoBehaviour
     private int irritationFactor;
     private MonsterDrink monsterDrink;
 
+    
+
 
     // Drink drink
     [SerializeField]
@@ -47,6 +49,27 @@ public class Monster : MonoBehaviour
 
         findChairCooldown = 0;
         irritationFactor = 1;
+
+        int spriteNumber = Random.Range(0, 50);
+
+        if (spriteNumber <= 15) {
+            this.GetComponent<SpriteRenderer>().sprite = GameHandler.possibleSprites[0];
+        } else if (spriteNumber <= 25)
+        {
+            this.GetComponent<SpriteRenderer>().sprite = GameHandler.possibleSprites[1];
+        }
+        else if (spriteNumber <= 35)
+        {
+            this.GetComponent<SpriteRenderer>().sprite = GameHandler.possibleSprites[2];
+        }
+        else if (spriteNumber <= 45)
+        {
+            this.GetComponent<SpriteRenderer>().sprite = GameHandler.possibleSprites[3];
+        }
+        else
+        {
+            this.GetComponent<SpriteRenderer>().sprite = GameHandler.possibleSprites[4];
+        }
 
     }
 
