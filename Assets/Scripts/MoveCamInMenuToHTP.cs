@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveCamInMenu : MonoBehaviour
+public class MoveCamInMenuToHTP : MonoBehaviour
 {
 
     public Transform pointA;
