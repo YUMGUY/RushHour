@@ -33,10 +33,6 @@ public class GameHandler : MonoBehaviour
     // TODO:
     // public PlayerDrink currentDriks
 
-    public static string[] ingredients = { "eyeball1", "eyeball2", "eyeball3", "eyeball4", "eyeball5", "eyeball6", 
-                                           "liquor1", "liquor2", "liquor3","liquor4","liquor5",
-                                            "mixer1","mixer2","mixer3","mixer4","mixer5"};
-
     // PREFABS
     public GameObject monsterPrefab;
 
@@ -79,12 +75,16 @@ public class GameHandler : MonoBehaviour
         if(gameMode == 0 && totalGameTime >= mediumIncrease * 60)
         {
             gameMode = 1;
+            Monster monster = createMonster();
+            queue.insert(monster);
             // TODO: Increase queue size by one
         } else if(gameMode == 1 && totalGameTime >= hardIncrease * 60)
         {
             gameMode = 2;
             easyMusic.Stop();
             hardMusic.Play();
+            Monster monster = createMonster();
+            queue.insert(monster);
             // TODO: Increase queue size by one
         }
 
@@ -94,7 +94,7 @@ public class GameHandler : MonoBehaviour
         {
             if ((int)queue.getTimeWaiting(i) < (int)(queue.getTimeWaiting(i) + deltaTime))
             {
-                awareness += ((queue.getTimeWaiting(i) / 5) * 2);
+                awareness += ((queue.getTimeWaiting(i) / 5) * queue.getIrritationFactor(i) * .5f);
             } 
         }
         queue.increaseAllTimeWaiting(Time.deltaTime);
@@ -117,23 +117,12 @@ public class GameHandler : MonoBehaviour
     }
 
     // compareDrink
-    /* use a int to keep track of the monster it matches
+    /*use a int to keep track of the monster it matches
      * public void compareDrink() {
      * 
      * int index = -1;
      * for(int i = 0; i < queue.getSize(); i++) {
-     *      bool mismatch = false;
-     *      // iterate through the list
-     *      foreach(string key: keys) {
-     *          if(currentDrink[key] != queue[i].getDrink[key]) {
-     *              mismatch = true;
-     *              break;
-     *          }
-     *      }
-     *      
-     *      if(!mismatch) {
-     *          index = i;
-        }
+     *      // compare using some equality method
      * }
      * if(i == -1) {
      *    drink slides off counter
@@ -145,8 +134,7 @@ public class GameHandler : MonoBehaviour
      *      queue.removeAt(i);
      *      
      *      // create a new monster
-     *      GameObject m = Instantiate(monsterPrefab, this.transform) as GameObject;
-            Monster monster = m.GetComponent<Monster>();
+     *      Monster monster = createMonster();
             queue.insert(monster);
      *      
      *      awareness -= reward;
@@ -160,4 +148,20 @@ public class GameHandler : MonoBehaviour
      * 
      * }
      */
+
+    public Monster createMonster()
+    {
+        GameObject m = Instantiate(monsterPrefab, this.transform) as GameObject;
+        Monster monster = m.GetComponent<Monster>();
+        if (gameMode == 1)
+        {
+            monster.setIrritationFactor(2);
+        }
+
+        if (gameMode == 2)
+        {
+            monster.setIrritationFactor(3);
+        }
+        return monster;
+    }
 }

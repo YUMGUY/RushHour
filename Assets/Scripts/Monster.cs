@@ -7,6 +7,9 @@ public class Monster : MonoBehaviour
     // variables added by timmy
     public GameObject bar;
     private GameObject barChair;
+
+
+    public GameObject offscreen;
     public bool foundChair;
     public bool takenChair;
     public float findChairCooldown;
@@ -16,7 +19,9 @@ public class Monster : MonoBehaviour
     private float moveTimer = 0;
     private float duration = 3f;
     // Start is called before the first frame update
+
     private float timeWaiting;
+    private int irritationFactor;
     // Drink drink
 
     void Start()
@@ -32,6 +37,8 @@ public class Monster : MonoBehaviour
         // drink.randomizeKeys();
 
         findChairCooldown = 0;
+        irritationFactor = 1;
+
     }
 
     public void increaseTimeWaiting(float additionalTime)
@@ -44,6 +51,7 @@ public class Monster : MonoBehaviour
         return timeWaiting;
     }
 
+    
     private void Update()
     {   
         // process of finding chair
@@ -70,6 +78,7 @@ public class Monster : MonoBehaviour
 
         findMonsterSeat();
     }
+    
     // find available seat at the bar
     public void findMonsterSeat()
     {
@@ -88,5 +97,20 @@ public class Monster : MonoBehaviour
        
        
         
+    }
+
+    public void moveOffScreen()
+    {
+        transform.position = Vector3.Lerp(transform.position, offscreen.transform.position, moveTimer/duration);
+    }
+
+    public int getIrritationFactor()
+    {
+        return irritationFactor;
+    }
+
+    public void setIrritationFactor(int factor)
+    {
+        irritationFactor = factor;
     }
 }
