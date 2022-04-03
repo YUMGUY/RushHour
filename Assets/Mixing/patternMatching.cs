@@ -14,6 +14,8 @@ public class patternMatching : MonoBehaviour
 
     public MoveCamera movingCamera;
     public currDrink currentDrink;
+
+    public GameObject StopMixingButtonRef;
     private void Awake()
     {
         //int index = Random.Range(0, patterns.Length);
@@ -101,6 +103,8 @@ public class patternMatching : MonoBehaviour
                     textbox.gameObject.SetActive(false);
                     compare.gameObject.SetActive(false);
                     this.gameObject.SetActive(false);
+
+                    StopMixingButtonRef.gameObject.SetActive(false);
                 }
                
             }
