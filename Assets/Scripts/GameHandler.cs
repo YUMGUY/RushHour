@@ -23,6 +23,7 @@ public class GameHandler : MonoBehaviour
 
     // UI control
     public Image awarenessBar;
+    public GameObject flag;
 
     // int to keep track of game code
     // 0 = easy
@@ -110,6 +111,7 @@ public class GameHandler : MonoBehaviour
             if ((int)queue.getTimeWaiting(i) < (int)(queue.getTimeWaiting(i) + deltaTime))
             {
                 awareness += ((queue.getTimeWaiting(i) / 5) * queue.getIrritationFactor(i) * .5f);
+                flag.transform.localPosition = new Vector2(0f, flag.transform.localPosition.y + 1 ); // good rate, more monsters 
             } 
         }
         queue.increaseAllTimeWaiting(Time.deltaTime);
@@ -123,6 +125,13 @@ public class GameHandler : MonoBehaviour
 
         // update awareness UI
         awarenessBar.fillAmount = awareness / 100;
+        // -110 is the base, -10 is the top
+        //if(awareness <= 100)
+        //{
+        //    float stepCount = 1f;
+        //    flag.transform.localPosition = new Vector2(0f, flag.transform.localPosition.y +  .5f * awareness * stepCount * Time.deltaTime);
+        //}
+       
     }
 
     // TODO: boss mini game
