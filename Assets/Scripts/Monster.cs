@@ -9,7 +9,7 @@ public class Monster : MonoBehaviour
     public GameObject barChair;
 
 
-    public GameObject offscreen;
+    public Transform offscreen;
     public bool foundChair;
     public bool takenChair;
     public float findChairCooldown;
@@ -26,6 +26,8 @@ public class Monster : MonoBehaviour
 
     private int irritationFactor;
     private MonsterDrink monsterDrink;
+    private bool movingAway;
+    private float timer;
     
     
 
@@ -39,6 +41,7 @@ public class Monster : MonoBehaviour
 
         //  bar = GameObject.Find("makeshift bar");
         bar = GameObject.FindGameObjectWithTag("TheBar");
+        movingAway = false;
 
 
 
@@ -53,13 +56,16 @@ public class Monster : MonoBehaviour
         int spriteNumber = Random.Range(0, 50);
         if (spriteNumber <= 25) {
             this.GetComponent<SpriteRenderer>().sprite = GameHandler.possibleSprites[0];
-        } else if (spriteNumber <= 40)
+        } else if (spriteNumber <= 35)
         {
             this.GetComponent<SpriteRenderer>().sprite = GameHandler.possibleSprites[1];
         }
-        else
+        else if(spriteNumber <= 45)
         {
             this.GetComponent<SpriteRenderer>().sprite = GameHandler.possibleSprites[2];
+        } else
+        {
+            this.GetComponent<SpriteRenderer>().sprite = GameHandler.possibleSprites[3];
         }
 
     }
@@ -81,7 +87,7 @@ public class Monster : MonoBehaviour
         // find nearest available chair
         if(foundChair == false)
         {
-           for(int i = 0; i < bar.transform.childCount; ++i)
+           for(int i = 2; i > 0; --i)
            {
                 if(bar.transform.GetChild(i).GetComponent<seatProperties>().seatOpen == true && bar.transform.GetChild(i).gameObject.activeInHierarchy == true)
                 {
@@ -117,6 +123,17 @@ public class Monster : MonoBehaviour
             this.transform.position = Vector2.Lerp(transform.position, barChair.transform.position, moveTimer / duration);
         }
 
+        if(movingAway)
+        {
+            timer += Time.deltaTime;
+            transform.position = Vector3.Lerp(transform.position, offscreen.transform.position, timer / duration);
+            
+            if(timer/duration >= .90)
+            {
+                this.barChair.GetComponent<seatProperties>().seatOpen = true;
+                Destroy(this.gameObject);
+            }
+        }
     }
     
     // find available seat at the bar
@@ -124,7 +141,9 @@ public class Monster : MonoBehaviour
 
     public void moveOffScreen()
     {
-        transform.position = Vector3.Lerp(transform.position, offscreen.transform.position, moveTimer/duration);
+        movingAway = true;
+        timer = 0;
+        
     }
 
     public int getIrritationFactor()

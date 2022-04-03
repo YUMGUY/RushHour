@@ -19,6 +19,7 @@ public class GameHandler : MonoBehaviour
     public AudioSource hardMusic;
     public AudioSource talking;
     public AudioSource happyGrunt;
+    public AudioSource slide;
 
     // UI control
     public Image awarenessBar;
@@ -42,6 +43,14 @@ public class GameHandler : MonoBehaviour
     // TODO: Initialize sprite list
     public static List<Sprite> possibleSprites;
 
+    public GlassSlide glass;
+    public Transform offTheBar;
+
+    public DialogBox box1;
+    public DialogBox box2;
+    public DialogBox box3;
+
+
     void Start()
     {
         totalGameTime = 0;
@@ -53,8 +62,8 @@ public class GameHandler : MonoBehaviour
 
 
         // create first attendent and put them in queue
-
         Monster monster = createMonster();
+        box1.updateBubble(monster.getMonsterDrink());
         queue = GetComponent<MonsterQueue>();
         queue.insert(monster);
 
@@ -63,6 +72,8 @@ public class GameHandler : MonoBehaviour
 
         // currentDrink = Drink();
         // static Gameobject currentDrink; getcomponent to get the current drink's script
+        box2.gameObject.SetActive(false);
+        box3.gameObject.SetActive(false);
 
         fillSpriteList();
     }
@@ -71,7 +82,7 @@ public class GameHandler : MonoBehaviour
     void Update()
     {
         // check for key press
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.E))
         {
             compareDrink();
         }
@@ -80,18 +91,24 @@ public class GameHandler : MonoBehaviour
         totalGameTime += Time.deltaTime;
 
         // do updates in difficulty based on time
-        if (gameMode == 0 && totalSuccessfulDrinks >= 5)
+        if (gameMode == 0 && totalSuccessfulDrinks >= 1)
         {
             gameMode = 1;
             Monster monster = createMonster();
             queue.insert(monster);
+            box2.gameObject.SetActive(true);
+            box2.updateBubble(monster.getMonsterDrink());
 
-        } else if(gameMode == 1 && totalSuccessfulDrinks >= 10)
+        } else if(gameMode == 1 && totalSuccessfulDrinks >= 2)
         {
+            
             gameMode = 2;
             easyMusic.Stop();
             hardMusic.Play();
             Monster monster = createMonster();
+
+            box3.gameObject.SetActive(true);
+            box3.updateBubble(monster.getMonsterDrink());
             queue.insert(monster);
 
         }
@@ -139,21 +156,39 @@ public class GameHandler : MonoBehaviour
 
 
         // if the drink was not found
+        slide.Play();
         if(index == -1)
         {
             // animate off the bar
-            currentDrink.glassBreaking.Play();
+            glass.setDestination(offTheBar);
             awareness += punishment;
             punishment *= 2;
 
         } else
         {
             // slide to monster at position index
+            Transform copy = queue.getMonsterTransform(index);
+            glass.setDestination(copy);
             happyGrunt.Play();
             queue.remove(index);
             awareness -= reward;
             punishment = 5;
             totalSuccessfulDrinks++;
+
+            Monster monster = createMonster();
+
+            if (index == 0)
+            {
+                box1.updateBubble(monster.getMonsterDrink());
+            } else if(index == 1)
+            {
+                box2.updateBubble(monster.getMonsterDrink());
+            } else
+            {
+                box3.updateBubble(monster.getMonsterDrink());
+            }
+            queue = GetComponent<MonsterQueue>();
+            queue.insert(monster);
         }
 
         currentDrink.clearDrink();
@@ -162,8 +197,10 @@ public class GameHandler : MonoBehaviour
     public Monster createMonster()
     {
         // TODO: fix transform
+        Debug.Log("Monster created");
         GameObject m = Instantiate(monsterPrefab, this.transform) as GameObject;
         Monster monster = m.GetComponent<Monster>();
+        monster.offscreen = offTheBar;
         if (gameMode == 1)
         {
             monster.setIrritationFactor(2);

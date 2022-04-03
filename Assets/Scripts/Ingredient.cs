@@ -24,7 +24,6 @@ public class Ingredient : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(addedToDrink);
         /*
         if (transform.position.y <= lowerScreenBounds) { // Add || player is on outside bar screen, destroy immediately
             Destroy(gameObject);

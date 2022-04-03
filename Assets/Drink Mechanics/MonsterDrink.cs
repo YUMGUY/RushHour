@@ -91,12 +91,15 @@ public class MonsterDrink : MonoBehaviour
         {
             case 0:
                 this.hasBeenStirred = true;
+                size++;
                 break;
             case 1:
                 this.hasBeenShaken = true;
+                size++;
                 break;
             default:
                 this.hasBeenJuiced = true;
+                size++;
                 break;
         }
     }
