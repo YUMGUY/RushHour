@@ -91,7 +91,7 @@ public class GameHandler : MonoBehaviour
         totalGameTime += Time.deltaTime;
 
         // do updates in difficulty based on time
-        if (gameMode == 0 && totalSuccessfulDrinks >= 1)
+        if (gameMode == 0 && totalSuccessfulDrinks >= 5)
         {
             gameMode = 1;
             Monster monster = createMonster();
@@ -99,7 +99,7 @@ public class GameHandler : MonoBehaviour
             box2.gameObject.SetActive(true);
             box2.updateBubble(monster.getMonsterDrink());
 
-        } else if(gameMode == 1 && totalSuccessfulDrinks >= 2)
+        } else if(gameMode == 1 && totalSuccessfulDrinks >= 10)
         {
             
             gameMode = 2;
