@@ -43,6 +43,7 @@ public class juicingMechanics : MonoBehaviour
 
     private void OnDisable()
     {
+        currentFill = 0;
         backgroundMash.SetActive(false);
         moveCameraMash.canMove = true;
     }
@@ -132,7 +133,7 @@ public class juicingMechanics : MonoBehaviour
         {
             currentFill = maxFill;
             print("hurray you finished");
-            backgroundMash.SetActive(false);
+         
             this.gameObject.SetActive(false);
         }
     }
