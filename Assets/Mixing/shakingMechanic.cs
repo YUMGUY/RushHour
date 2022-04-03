@@ -33,8 +33,6 @@ public class shakingMechanic : MonoBehaviour
     public MoveCamera movingCamera;
 
     public currDrink currentDrink;
-
-    public GameObject StopMixingButtonRef;
     void Start()
     {
        
@@ -42,7 +40,7 @@ public class shakingMechanic : MonoBehaviour
 
     private void OnEnable()
     {
-        //StartCoroutine(flashRed());
+        StartCoroutine(flashRed());
         shake = false;
         int index = Random.Range(0, upShakeKey.Length);
         playerShakeDown = downShakeKey[index];
@@ -172,13 +170,12 @@ public class shakingMechanic : MonoBehaviour
             currentDrink.hasBeenShaken = true;
             currentDrink.shake.Stop();
 
-            StopMixingButtonRef.gameObject.SetActive(false);
-
+          
             this.gameObject.SetActive(false);
         }
     }
 
-    /*
+
     private IEnumerator flashRed()
     {
          while(true)
@@ -190,5 +187,5 @@ public class shakingMechanic : MonoBehaviour
             yield return new WaitForSeconds(.2f);
             yield return null;
         }
-    }*/
+    }
 }
