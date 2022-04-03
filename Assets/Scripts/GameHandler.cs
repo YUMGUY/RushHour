@@ -37,6 +37,9 @@ public class GameHandler : MonoBehaviour
     // PREFABS
     public GameObject monsterPrefab;
 
+    // TODO: Initialize sprite list
+    public static List<Sprite> possibleSprites;
+
     void Start()
     {
         totalGameTime = 0;
@@ -50,14 +53,15 @@ public class GameHandler : MonoBehaviour
 
         Monster monster = createMonster();
         queue = GetComponent<MonsterQueue>();
-        queue.insert(monster); 
+        queue.insert(monster);
 
         // either in game manager or in Monster.cs, handle how monster will find a seat - Timmy ( rn i am doing code in Monster.cs for the finding the seat
 
 
         // currentDrink = Drink();
         // static Gameobject currentDrink; getcomponent to get the current drink's script
-        
+
+        fillSpriteList();
     }
 
     // Update is called once per frame
@@ -166,5 +170,14 @@ public class GameHandler : MonoBehaviour
         }
         monster.setMonsterDrink(new MonsterDrink());
         return monster;
+    }
+
+    public void fillSpriteList()
+    {
+        SpriteRenderer[] childSprites = this.GetComponentsInChildren<SpriteRenderer>();
+        foreach(SpriteRenderer spriteRenderer in childSprites)
+        {
+            possibleSprites.Add(spriteRenderer.sprite);
+        }
     }
 }

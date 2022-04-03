@@ -25,7 +25,7 @@ public class MonsterDrink : MonoBehaviour
     {
 
         // everything needs a liquor
-        LiquidBase = Random.Range(0, 3);
+        LiquidBase = Random.Range(1, 4);
         size++;
 
         int orderSize = Random.Range(2, 5);
