@@ -16,6 +16,8 @@ public class patternMatching : MonoBehaviour
     public currDrink currentDrink;
 
     public GameObject refToClearButton;
+
+    public GameObject parentKey;
     private void Awake()
     {
         //int index = Random.Range(0, patterns.Length);
@@ -28,6 +30,7 @@ public class patternMatching : MonoBehaviour
     {
         // can be activated also by the make Drink function later on
         int index = Random.Range(0, patterns.Length);
+        parentKey.SetActive(true);
         currentDrink.stir.Play();
       //  print("yo this should be first");
         textbox.text = patterns[index];
@@ -47,7 +50,7 @@ public class patternMatching : MonoBehaviour
         textbox.gameObject.SetActive(false);
         compare.gameObject.SetActive(false);
         movingCamera.canMove = true;
-        
+        parentKey.SetActive(false);
         flag = false;
     }
     void Start()
