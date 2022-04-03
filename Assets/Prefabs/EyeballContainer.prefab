@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 9140033473631525982}
   - component: {fileID: 3329341474330382706}
   m_Layer: 6
-  m_Name: EyeballBrown
+  m_Name: EyeballPurple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -203,7 +203,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lowerScreenBounds: -10
   PrimaryID: Eyeball
-  SecondaryID: Brown
+  SecondaryID: Purple
 --- !u!58 &3329341474330382706
 CircleCollider2D:
   m_ObjectHideFlags: 0
