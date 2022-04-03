@@ -44,6 +44,11 @@ public class DialogBox : MonoBehaviour
     public Sprite brainjuice;
     public Sprite tonic;
 
+    // Mixing Methods
+    public Sprite shaken;
+    public Sprite stirred;
+    public Sprite juiced;
+
     private int numberInOrder;
     void Start()
     {
@@ -227,6 +232,25 @@ public class DialogBox : MonoBehaviour
         {
             // add tonic water
             iconSlots[numberInOrder].sprite = tonic;
+            numberInOrder++;
+        }
+
+        // Mixing Methods
+        if(drinkOrder.hasBeenJuiced)
+        {
+            iconSlots[numberInOrder].sprite = juiced;
+            numberInOrder++;
+        }
+
+        if (drinkOrder.hasBeenShaken)
+        {
+            iconSlots[numberInOrder].sprite = shaken;
+            numberInOrder++;
+        }
+
+        if (drinkOrder.hasBeenStirred)
+        {
+            iconSlots[numberInOrder].sprite = stirred;
             numberInOrder++;
         }
 

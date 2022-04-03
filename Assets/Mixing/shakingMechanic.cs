@@ -31,6 +31,8 @@ public class shakingMechanic : MonoBehaviour
     public GameObject shakingImage;
 
     public MoveCamera movingCamera;
+
+    public currDrink currentDrink;
     void Start()
     {
        
@@ -43,7 +45,7 @@ public class shakingMechanic : MonoBehaviour
         int index = Random.Range(0, upShakeKey.Length);
         playerShakeDown = downShakeKey[index];
         playerShakeUp = upShakeKey[index];
-
+        currentDrink.shake.Play();
 
         textup.text = playerShakeUp.ToString().ToUpper();
         textdown.text = playerShakeDown.ToString().ToUpper();
@@ -165,6 +167,8 @@ public class shakingMechanic : MonoBehaviour
         {
             currentFillShake = maxFillShake;
             print("hurray you finished shaking");
+            currentDrink.hasBeenShaken = true;
+            currentDrink.shake.Stop();
 
           
             this.gameObject.SetActive(false);

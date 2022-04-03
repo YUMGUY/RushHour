@@ -40,6 +40,13 @@ public class currDrink : MonoBehaviour
     public bool hasBeenShaken = false;
     public bool hasBeenJuiced = false;
 
+    [Header("Resources for Sounds")]
+    public AudioSource drinkPour;
+    public AudioSource shake;
+    public AudioSource stir;
+    public AudioSource explosion;
+    public AudioSource glassBreaking;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -290,7 +297,7 @@ public class currDrink : MonoBehaviour
                     addedLiquid = true;
                     if (LiquidBase == 0)
                     {
-                        
+                        drinkPour.Play();
                         switch (collision.GetComponent<Ingredient>().SecondaryID)
                         {
                             case "Lava":
@@ -355,6 +362,7 @@ public class currDrink : MonoBehaviour
     public void drinkExplosion() {
         
         _image.StartFlash(0.25f, Color.red);
+        explosion.Play();
         //Debug.Log("Tried to explode");
         if (cameraRef != null) {
             try

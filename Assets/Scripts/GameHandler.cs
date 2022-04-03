@@ -17,6 +17,7 @@ public class GameHandler : MonoBehaviour
     // Music Assets
     public AudioSource easyMusic;
     public AudioSource hardMusic;
+    public AudioSource talking;
 
     // UI control
     public Image awarenessBar;
@@ -45,6 +46,7 @@ public class GameHandler : MonoBehaviour
         totalGameTime = 0;
         awareness = 0;
         easyMusic.Play();
+        possibleSprites = new List<Sprite>();
 
         awarenessBar.fillAmount = 0;
 
@@ -139,6 +141,7 @@ public class GameHandler : MonoBehaviour
         if(index == -1)
         {
             // animate off the bar
+            currentDrink.glassBreaking.Play();
             awareness += punishment;
             punishment *= 2;
 

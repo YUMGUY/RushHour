@@ -16,6 +16,9 @@ public class MoveCamera : MonoBehaviour
     public bool moveToScene2;
     public bool moveToScene1;
 
+    // used for sound effect stuff
+    public GameHandler gameHandler;
+    private float soundDampening = .75f;
 
     public float cooldown;
 
@@ -44,6 +47,10 @@ public class MoveCamera : MonoBehaviour
             {
                 moveToScene2 = true;
                 moveToScene1 = false;
+                gameHandler.talking.volume *= soundDampening;
+                gameHandler.easyMusic.volume *= soundDampening;
+                gameHandler.hardMusic.volume *= soundDampening;
+
                 cooldown = .5f;
             }
 
@@ -66,6 +73,11 @@ public class MoveCamera : MonoBehaviour
             {
                 moveToScene1 = true;
                 moveToScene2 = false;
+
+                gameHandler.talking.volume /= soundDampening;
+                gameHandler.easyMusic.volume /= soundDampening;
+                gameHandler.hardMusic.volume /= soundDampening;
+
                 cooldown = .5f;
 
             }
