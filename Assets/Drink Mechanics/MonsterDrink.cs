@@ -19,6 +19,10 @@ public class MonsterDrink : MonoBehaviour
     public bool Tentacles = false; //flase = no tentacles
     public int LiquidBase = 0; //0 = empty glass, 1 = lava slime, 2 = blood, 3 = brainjuice, 4 = tonic water
 
+    public bool hasBeenStirred = false;
+    public bool hasBeenShaken = false;
+    public bool hasBeenJuiced = false;
+
     public int size = 0;
 
     public MonsterDrink()
@@ -28,7 +32,7 @@ public class MonsterDrink : MonoBehaviour
         LiquidBase = Random.Range(1, 4);
         size++;
 
-        int orderSize = Random.Range(2, 5);
+        int orderSize = Random.Range(1, 4);
 
         while(size != orderSize)
         {
@@ -81,6 +85,20 @@ public class MonsterDrink : MonoBehaviour
                 size++;
             }
         }
+
+        int mixingMethod = Random.Range(0, 2);
+        switch(mixingMethod)
+        {
+            case 0:
+                this.hasBeenStirred = true;
+                break;
+            case 1:
+                this.hasBeenShaken = true;
+                break;
+            default:
+                this.hasBeenJuiced = true;
+                break;
+        }
     }
 
     public bool compareToCurrentDrink(currDrink drink)
@@ -96,6 +114,9 @@ public class MonsterDrink : MonoBehaviour
         sameDrink = sameDrink && (drink.Hearts == this.Hearts);
         sameDrink = sameDrink && (drink.Tentacles == this.Tentacles);
         sameDrink = sameDrink && (drink.LiquidBase == this.LiquidBase);
+        sameDrink = sameDrink && (drink.hasBeenJuiced == this.hasBeenJuiced);
+        sameDrink = sameDrink && (drink.hasBeenShaken == this.hasBeenShaken);
+        sameDrink = sameDrink && (drink.hasBeenStirred == this.hasBeenStirred);
 
         return sameDrink;
     }

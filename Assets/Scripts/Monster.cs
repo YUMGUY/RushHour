@@ -51,7 +51,7 @@ public class Monster : MonoBehaviour
         irritationFactor = 1;
 
         int spriteNumber = Random.Range(0, 50);
-
+        /*
         if (spriteNumber <= 15) {
             this.GetComponent<SpriteRenderer>().sprite = GameHandler.possibleSprites[0];
         } else if (spriteNumber <= 25)
@@ -70,6 +70,7 @@ public class Monster : MonoBehaviour
         {
             this.GetComponent<SpriteRenderer>().sprite = GameHandler.possibleSprites[4];
         }
+        */
 
     }
 
