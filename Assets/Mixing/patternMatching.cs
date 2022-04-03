@@ -41,10 +41,11 @@ public class patternMatching : MonoBehaviour
     private void OnDisable()
     {
         //textbox.text = "";
+        compare.text = "";
         textbox.gameObject.SetActive(false);
         compare.gameObject.SetActive(false);
         movingCamera.canMove = true;
-        compare.text = "";
+        
         flag = false;
     }
     void Start()

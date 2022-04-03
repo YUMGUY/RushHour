@@ -26,6 +26,7 @@ public class shakingMechanic : MonoBehaviour
 
     public TextMeshProUGUI textup;
     public TextMeshProUGUI textdown;
+    public TextMeshProUGUI flashingText;
 
     public GameObject shakingImage;
 
@@ -34,11 +35,12 @@ public class shakingMechanic : MonoBehaviour
     public currDrink currentDrink;
     void Start()
     {
-        
+       
     }
 
     private void OnEnable()
     {
+        StartCoroutine(flashRed());
         shake = false;
         int index = Random.Range(0, upShakeKey.Length);
         playerShakeDown = downShakeKey[index];
@@ -56,6 +58,7 @@ public class shakingMechanic : MonoBehaviour
     // enable player to press shift again
     private void OnDisable()
     {
+        currentFillShake = 0;
         shakingImage.SetActive(false);
         movingCamera.canMove = true;
     }
@@ -167,8 +170,22 @@ public class shakingMechanic : MonoBehaviour
             currentDrink.hasBeenShaken = true;
             currentDrink.shake.Stop();
 
-            shakingImage.SetActive(false);
+          
             this.gameObject.SetActive(false);
+        }
+    }
+
+
+    private IEnumerator flashRed()
+    {
+         while(true)
+        {
+            flashingText.color = Color.red;
+
+            yield return new WaitForSeconds(.2f);
+            flashingText.color = Color.white;
+            yield return new WaitForSeconds(.2f);
+            yield return null;
         }
     }
 }
