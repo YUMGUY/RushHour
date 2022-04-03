@@ -28,7 +28,7 @@ public class GameHandler : MonoBehaviour
     // 0 = easy
     // 1 = medium
     // 2 = hard
-    private int gameMode = 0;
+    public int gameMode = 0;
 
     // keep track of awareness punishment
     private int punishment = 5;
