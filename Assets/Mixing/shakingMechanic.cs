@@ -26,13 +26,14 @@ public class shakingMechanic : MonoBehaviour
 
     public TextMeshProUGUI textup;
     public TextMeshProUGUI textdown;
+    public TextMeshProUGUI flashingText;
 
     public GameObject shakingImage;
 
     public MoveCamera movingCamera;
     void Start()
     {
-        
+        StartCoroutine(flashText());
     }
 
     private void OnEnable()
@@ -55,6 +56,7 @@ public class shakingMechanic : MonoBehaviour
     private void OnDisable()
     {
         shakingImage.SetActive(false);
+        currentFillShake = 0;
         movingCamera.canMove = true;
     }
     // Update is called once per frame
@@ -163,8 +165,25 @@ public class shakingMechanic : MonoBehaviour
             currentFillShake = maxFillShake;
             print("hurray you finished shaking");
 
-            shakingImage.SetActive(false);
             this.gameObject.SetActive(false);
         }
+    }
+
+
+    // coroutine for flashing text
+
+    private IEnumerator flashText()
+    {
+        while(true)
+        {
+        flashingText.color = Color.red;
+        yield return new WaitForSeconds(.2f);
+        flashingText.color = Color.white;
+            yield return new WaitForSeconds(.2f);
+            yield return null;
+
+        }
+       
+       // yield return null;
     }
 }

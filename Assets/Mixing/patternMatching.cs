@@ -94,8 +94,7 @@ public class patternMatching : MonoBehaviour
                 if(count == textbox.text.Length)
                 {
                     print("yo you did it");
-                    textbox.gameObject.SetActive(false);
-                    compare.gameObject.SetActive(false);
+               
                     this.gameObject.SetActive(false);
                 }
                

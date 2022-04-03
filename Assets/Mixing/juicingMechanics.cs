@@ -45,6 +45,7 @@ public class juicingMechanics : MonoBehaviour
     {
         backgroundMash.SetActive(false);
         moveCameraMash.canMove = true;
+        currentFill = 0;
     }
 
     // Update is called once per frame
