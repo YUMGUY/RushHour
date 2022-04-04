@@ -58,6 +58,12 @@ public class DialogBox : MonoBehaviour
 
     public void updateBubble(MonsterDrink order)
     {
+        // CLEAR EACH SPRITE
+        for(int i = 0; i < iconSlots.Length; i++)
+        {
+            iconSlots[i].sprite = null;
+        }
+
         drinkOrder = order;
         // number we've already added to the speech bubble to keep track of position
         numberInOrder = 1;
