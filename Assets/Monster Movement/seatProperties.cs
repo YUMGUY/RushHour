@@ -10,7 +10,7 @@ public class seatProperties : MonoBehaviour
 
     private void Awake()
     {
-        seatOpen = true;
+        //seatOpen = true;
     }
     void Start()
     {
