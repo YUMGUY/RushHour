@@ -52,6 +52,10 @@ public class GameHandler : MonoBehaviour
     public DialogBox box2;
     public DialogBox box3;
 
+    public seatProperties stool1;
+    public seatProperties stool2;
+    public seatProperties stool3;
+
 
     void Start()
     {
@@ -62,12 +66,16 @@ public class GameHandler : MonoBehaviour
 
         awarenessBar.fillAmount = 0;
 
+        stool1.seatOpen = true;
+        stool2.seatOpen = false;
+        stool3.seatOpen = false;
+
 
         // create first attendent and put them in queue
         Monster monster = createMonster();
         box1.updateBubble(monster.getMonsterDrink());
         queue = GetComponent<MonsterQueue>();
-        queue.insert(monster);
+        queue.insert(queue.getSize(), monster);
 
         // either in game manager or in Monster.cs, handle how monster will find a seat - Timmy ( rn i am doing code in Monster.cs for the finding the seat
 
@@ -91,29 +99,6 @@ public class GameHandler : MonoBehaviour
 
         // add total game time
         totalGameTime += Time.deltaTime;
-
-        // do updates in difficulty based on time
-        if (gameMode == 0 && totalSuccessfulDrinks >= 5)
-        {
-            gameMode = 1;
-            Monster monster = createMonster();
-            queue.insert(monster);
-            box2.gameObject.SetActive(true);
-            box2.updateBubble(monster.getMonsterDrink());
-
-        } else if(gameMode == 1 && totalSuccessfulDrinks >= 10)
-        {
-            
-            gameMode = 2;
-            easyMusic.Stop();
-            hardMusic.Play();
-            Monster monster = createMonster();
-
-            box3.gameObject.SetActive(true);
-            box3.updateBubble(monster.getMonsterDrink());
-            queue.insert(monster);
-
-        }
 
         // Do time based decreases to awareness
         float deltaTime = Time.deltaTime;
@@ -180,7 +165,6 @@ public class GameHandler : MonoBehaviour
             totalSuccessfulDrinks++;
 
             Monster monster = createMonster();
-
             if (index == 0)
             {
                 box1.updateBubble(monster.getMonsterDrink());
@@ -192,7 +176,33 @@ public class GameHandler : MonoBehaviour
                 box3.updateBubble(monster.getMonsterDrink());
             }
             queue = GetComponent<MonsterQueue>();
-            queue.insert(monster);
+            queue.insert(index, monster);
+        }
+
+        // do updates in difficulty based on drinks served
+        if (gameMode == 0 && totalSuccessfulDrinks >= 1)
+        {
+            gameMode = 1;
+            Monster monster = createMonster();
+            queue.insert(queue.getSize(), monster);
+            stool2.seatOpen = true;
+            box2.gameObject.SetActive(true);
+            box2.updateBubble(monster.getMonsterDrink());
+
+        }
+        else if (gameMode == 1 && totalSuccessfulDrinks >= 2)
+        {
+
+            gameMode = 2;
+            stool3.seatOpen = true;
+            easyMusic.Stop();
+            hardMusic.Play();
+            Monster monster = createMonster();
+
+            box3.gameObject.SetActive(true);
+            box3.updateBubble(monster.getMonsterDrink());
+            queue.insert(queue.getSize(), monster);
+
         }
 
         currentDrink.clearDrink();

@@ -14,9 +14,10 @@ public class GlassSlide : MonoBehaviour
     private float moveTimer = 0;
 
     public AudioSource glassBreaking;
+    public Transform offscreen;
 
     // hard code 5 seconds
-    private float duration = 14f;
+    private float duration = 100f;
 
     void Start()
     {
@@ -35,10 +36,14 @@ public class GlassSlide : MonoBehaviour
             moveTimer += Time.deltaTime;
             this.transform.position = Vector2.Lerp(transform.position, destination.transform.position, moveTimer / duration);
 
-            if (moveTimer / duration >= .05) {
+            if (moveTimer / duration >= .01) {
                 moveTimer = 0;
                 atDestination = true;
-                glassBreaking.Play();
+
+                if (destination.position == offscreen.position)
+                {
+                    glassBreaking.Play();
+                }
                 glass.enabled = false;
                 drink.enabled = false;
                 resetPosition();

@@ -42,7 +42,7 @@ public class MonsterQueue : MonoBehaviour
         return size;
     }
 
-    public void insert(Monster m)
+    public void insert(int index, Monster m)
     {
         queue.Insert(getSize(), m);
         size++;
@@ -52,6 +52,7 @@ public class MonsterQueue : MonoBehaviour
     {
         queue[index].moveOffScreen();
         // Destroy(queue[index].gameObject);
+        queue[index].barChair.GetComponent<seatProperties>().seatOpen = true;
         queue.RemoveAt(index);
         size--;
     }

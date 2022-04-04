@@ -25,7 +25,7 @@ public class Monster : MonoBehaviour
     private float timeWaiting;
 
     private int irritationFactor;
-    private MonsterDrink monsterDrink;
+    public MonsterDrink monsterDrink;
     private bool movingAway;
     private float timer;
     
@@ -47,8 +47,7 @@ public class Monster : MonoBehaviour
 
         timeWaiting = 0;
         foundChair = false;
-        // drink = Drink();
-        // drink.randomizeKeys();
+        findSeat();
 
         findChairCooldown = 0;
         irritationFactor = 1;
@@ -84,36 +83,9 @@ public class Monster : MonoBehaviour
     private void Update()
     {
 
-        // find nearest available chair
-        if(foundChair == false)
+        if(!foundChair)
         {
-           for(int i = 2; i > 0; --i)
-           {
-                if(bar.transform.GetChild(i).GetComponent<seatProperties>().seatOpen == true && bar.transform.GetChild(i).gameObject.activeInHierarchy == true)
-                {
-                    // close the seat
-                    barChair = bar.transform.GetChild(i).gameObject;
-
-                    // so that the other monsters won't take the seat
-                   
-                    print("index is: " + i);
-
-                    // for the queue - TIMMY
-                    chairPosition = i;
-                   
-                    print(barChair.transform.position);
-                   
-
-                    barChair.GetComponent<seatProperties>().seatOpen = false;
-                    foundChair = true;
-
-                    // find nearest available chair
-                    break;
-                }
-           }
-
-            
-           // if any chairs aren't found
+            findSeat();
         }
         
         if(foundChair == true)
@@ -137,8 +109,34 @@ public class Monster : MonoBehaviour
     }
     
     // find available seat at the bar
- 
+    public void findSeat()
+    {
+        // find nearest available chair
+            for (int i = 0; i < bar.transform.GetComponentsInChildren<seatProperties>().Length; i++)
+            {
+                if (bar.transform.GetChild(i).GetComponent<seatProperties>().seatOpen == true && bar.transform.GetChild(i).gameObject.activeInHierarchy == true)
+                {
+                    // close the seat
+                    barChair = bar.transform.GetChild(i).gameObject;
 
+                    // so that the other monsters won't take the seat
+
+                    print("index is: " + i);
+
+                    // for the queue - TIMMY
+                    chairPosition = i;
+
+                    print(barChair.transform.position);
+
+
+                    barChair.GetComponent<seatProperties>().seatOpen = false;
+                    foundChair = true;
+
+                    // find nearest available chair
+                    break;
+                }
+            }
+    }
     public void moveOffScreen()
     {
         movingAway = true;
