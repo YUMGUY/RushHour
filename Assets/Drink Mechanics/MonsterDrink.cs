@@ -104,13 +104,46 @@ public class MonsterDrink : MonoBehaviour
         }
     }
 
+    // want eyes to not conform to any order
+    private bool compareEyes(currDrink drink)
+    {
+        bool eyes = true;
+
+        // one or no eyes
+        if (Eyeballs1 == 0 || Eyeballs2 == 0)
+        {
+            eyes = eyes && (drink.Eyeballs1 == this.Eyeballs1);
+            eyes = eyes && (drink.Eyeballs2 == this.Eyeballs2);
+            eyes = eyes && (drink.Eyeballs3 == this.Eyeballs3);
+        }
+
+        // two eyes
+        else if (Eyeballs2 != 0 && Eyeballs3 == 0)
+        {
+            bool order1 = (drink.Eyeballs1 == this.Eyeballs1) && (drink.Eyeballs2 == this.Eyeballs2);
+            bool order2 = (drink.Eyeballs1 == this.Eyeballs2) && (drink.Eyeballs2 == this.Eyeballs1);
+            eyes = (order1 || order2) && (drink.Eyeballs3 == this.Eyeballs3);
+        }
+
+        // three eyes
+        else
+        {
+            bool order1 = (drink.Eyeballs1 == this.Eyeballs1) && (drink.Eyeballs2 == this.Eyeballs2) && (drink.Eyeballs3 == this.Eyeballs3);
+            bool order2 = (drink.Eyeballs1 == this.Eyeballs1) && (drink.Eyeballs2 == this.Eyeballs3) && (drink.Eyeballs3 == this.Eyeballs2);
+            bool order3 = (drink.Eyeballs1 == this.Eyeballs2) && (drink.Eyeballs2 == this.Eyeballs1) && (drink.Eyeballs3 == this.Eyeballs3);
+            bool order4 = (drink.Eyeballs1 == this.Eyeballs2) && (drink.Eyeballs2 == this.Eyeballs3) && (drink.Eyeballs3 == this.Eyeballs1);
+            bool order5 = (drink.Eyeballs1 == this.Eyeballs3) && (drink.Eyeballs2 == this.Eyeballs2) && (drink.Eyeballs3 == this.Eyeballs3);
+            bool order6 = (drink.Eyeballs1 == this.Eyeballs3) && (drink.Eyeballs2 == this.Eyeballs1) && (drink.Eyeballs3 == this.Eyeballs2);
+            eyes = order1 || order2 || order3 || order4 || order5 || order6;
+        }
+
+        return eyes;
+    }
+
     public bool compareToCurrentDrink(currDrink drink)
     {
-        bool sameDrink = true;
+        bool sameDrink = compareEyes(drink);
 
-        sameDrink = sameDrink && (drink.Eyeballs1 == this.Eyeballs1);
-        sameDrink = sameDrink && (drink.Eyeballs2 == this.Eyeballs2);
-        sameDrink = sameDrink && (drink.Eyeballs3 == this.Eyeballs3);
         sameDrink = sameDrink && (drink.Gemstones == this.Gemstones);
         sameDrink = sameDrink && (drink.Fruits == this.Fruits);
         sameDrink = sameDrink && (drink.Fingers == this.Fingers);

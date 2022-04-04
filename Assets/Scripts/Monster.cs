@@ -102,7 +102,6 @@ public class Monster : MonoBehaviour
             
             if(timer/duration >= .90)
             {
-                this.barChair.GetComponent<seatProperties>().seatOpen = true;
                 Destroy(this.gameObject);
             }
         }
