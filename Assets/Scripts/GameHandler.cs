@@ -15,7 +15,7 @@ public class GameHandler : MonoBehaviour
     private float awareness;
     private float maxAwareness = 100;
     private const float mediumIncrease = 3;
-    private const float hardIncrease = 6;
+    private const float hardIncrease = 7;
 
     // Music Assets
     public AudioSource easyMusic;
@@ -177,7 +177,7 @@ public class GameHandler : MonoBehaviour
         }
 
         // do updates in difficulty based on drinks served
-        if (gameMode == 0 && totalSuccessfulDrinks >= 1)
+        if (gameMode == 0 && totalSuccessfulDrinks >= mediumIncrease)
         {
             gameMode = 1;
             Monster monster = createMonster();
@@ -187,7 +187,7 @@ public class GameHandler : MonoBehaviour
             box2.updateBubble(monster.getMonsterDrink());
 
         }
-        else if (gameMode == 1 && totalSuccessfulDrinks >= 2)
+        else if (gameMode == 1 && totalSuccessfulDrinks >= hardIncrease)
         {
 
             gameMode = 2;
