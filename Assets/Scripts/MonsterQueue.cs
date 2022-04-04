@@ -44,10 +44,11 @@ public class MonsterQueue : MonoBehaviour
 
     public void insert(int index, Monster m)
     {
-        queue.Insert(getSize(), m);
+        queue.Insert(index, m);
         size++;
     }
 
+    /*
     public void remove(int index)
     {
         queue[index].moveOffScreen();
@@ -56,6 +57,7 @@ public class MonsterQueue : MonoBehaviour
         queue.RemoveAt(index);
         size--;
     }
+    */
 
     public int getIrritationFactor(int index)
     {
@@ -70,6 +72,13 @@ public class MonsterQueue : MonoBehaviour
     public Transform getMonsterTransform(int index)
     {
         return queue[index].gameObject.transform;
+    }
+
+    public void replace(int index, Monster m)
+    {
+        queue[index].moveOffScreen();
+        queue[index].barChair.GetComponent<seatProperties>().seatOpen = true;
+        queue[index] = m;
     }
 
 }

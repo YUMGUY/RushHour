@@ -27,14 +27,24 @@ public class EmployeeOfTheMonth : MonoBehaviour
 
         else if (gameManage.gameMode == 1)
         {
-            this.GetComponent<SpriteRenderer>().sprite = spritesMonth[1];
+            this.GetComponent<Image>().sprite = spritesMonth[1];
         }
 
         else if (gameManage.gameMode == 2)
         {
 
-            this.GetComponent<SpriteRenderer>().sprite = spritesMonth[2];
+            this.GetComponent<Image>().sprite = spritesMonth[2];
 
+        }
+    }
+
+    void initializeSprites()
+    {
+        Image[] photos = GameObject.Find("EmployeePhotos").GetComponentsInChildren<Image>();
+
+        for(int i = 0; i < photos.Length; i++)
+        {
+            spritesMonth[i] = photos[i].sprite;
         }
     }
 }

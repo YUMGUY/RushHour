@@ -13,6 +13,7 @@ public class GameHandler : MonoBehaviour
     private float totalGameTime;
     private float totalSuccessfulDrinks;
     private float awareness;
+    private float maxAwareness = 100;
     private const float mediumIncrease = 3;
     private const float hardIncrease = 6;
 
@@ -22,9 +23,6 @@ public class GameHandler : MonoBehaviour
     public AudioSource talking;
     public AudioSource happyGrunt;
     public AudioSource slide;
-
-    // UI control
-    public Image awarenessBar;
 
     // int to keep track of game code
     // 0 = easy
@@ -63,8 +61,6 @@ public class GameHandler : MonoBehaviour
         awareness = 0;
         easyMusic.Play();
         possibleSprites = new List<Sprite>();
-
-        awarenessBar.fillAmount = 0;
 
         stool1.seatOpen = true;
         stool2.seatOpen = false;
@@ -114,14 +110,13 @@ public class GameHandler : MonoBehaviour
         
 
         // trigger mini game if awareness is over 100
-        if (awareness >= 100)
+        if (awareness >= maxAwareness)
         {
             triggerMiniGame();
             sceneref.GetComponent<SceneControllerLite>().transitionToGame();
         }
 
         // update awareness UI
-        awarenessBar.fillAmount = awareness / 100;
     }
 
     // TODO: boss mini game
@@ -159,7 +154,7 @@ public class GameHandler : MonoBehaviour
             Transform copy = queue.getMonsterTransform(index);
             glass.setDestination(copy);
             happyGrunt.Play();
-            queue.remove(index);
+            //queue.remove(index);
             awareness -= reward;
             punishment = 5;
             totalSuccessfulDrinks++;
@@ -175,8 +170,10 @@ public class GameHandler : MonoBehaviour
             {
                 box3.updateBubble(monster.getMonsterDrink());
             }
+            
             queue = GetComponent<MonsterQueue>();
-            queue.insert(index, monster);
+            // queue.insert(index, monster);
+            queue.replace(index, monster);
         }
 
         // do updates in difficulty based on drinks served
@@ -217,12 +214,12 @@ public class GameHandler : MonoBehaviour
         monster.offscreen = offTheBar;
         if (gameMode == 1)
         {
-            monster.setIrritationFactor(2);
+            monster.setIrritationFactor(1);
         }
 
         if (gameMode == 2)
         {
-            monster.setIrritationFactor(3);
+            monster.setIrritationFactor(2);
         }
         monster.setMonsterDrink(new MonsterDrink());
         return monster;
@@ -235,5 +232,10 @@ public class GameHandler : MonoBehaviour
         {
             possibleSprites.Add(spriteRenderer.sprite);
         }
+    }
+
+    public float getAwarenessRatio()
+    {
+        return awareness / maxAwareness;
     }
 }
