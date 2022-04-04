@@ -22,4 +22,8 @@ public class SceneControllerLite : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
+    public void transitionToGame()
+    {
+        SceneManager.LoadScene(2);
+    }
 }

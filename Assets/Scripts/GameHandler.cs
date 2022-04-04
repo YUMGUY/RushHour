@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class GameHandler : MonoBehaviour
 {
     // Start is called before the first frame update
+    public GameObject sceneref;
+    public GameObject flag;
 
     private MonsterQueue queue;
     private float totalGameTime;
@@ -120,6 +122,7 @@ public class GameHandler : MonoBehaviour
             if ((int)queue.getTimeWaiting(i) < (int)(queue.getTimeWaiting(i) + deltaTime))
             {
                 awareness += ((queue.getTimeWaiting(i) / 5) * queue.getIrritationFactor(i) * .5f);
+                flag.transform.position = new Vector2(flag.transform.position.x, flag.transform.position.y + 1 * Time.deltaTime * 1.5f);
             } 
         }
         queue.increaseAllTimeWaiting(Time.deltaTime);
@@ -129,6 +132,7 @@ public class GameHandler : MonoBehaviour
         if (awareness >= 100)
         {
             triggerMiniGame();
+            sceneref.GetComponent<SceneControllerLite>().transitionToGame();
         }
 
         // update awareness UI
