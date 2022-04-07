@@ -16,6 +16,7 @@ public class GameHandler : MonoBehaviour
     private float maxAwareness = 100;
     private const float mediumIncrease = 3;
     private const float hardIncrease = 7;
+    public bool drinkPrimed = false;
 
     // Music Assets
     public AudioSource easyMusic;
@@ -82,14 +83,17 @@ public class GameHandler : MonoBehaviour
         box3.gameObject.SetActive(false);
 
         fillSpriteList();
+
+        drinkPrimed = true;
     }
 
     // Update is called once per frame
     void Update()
     {
         // check for key press
-        if(Input.GetKeyDown(KeyCode.E))
+        if(Input.GetKeyDown(KeyCode.E) && drinkPrimed)
         {
+            drinkPrimed = false;
             compareDrink();
         }
 
@@ -202,7 +206,7 @@ public class GameHandler : MonoBehaviour
 
         }
 
-        currentDrink.clearDrink();
+        //currentDrink.clearDrink();
     }
 
     public Monster createMonster()

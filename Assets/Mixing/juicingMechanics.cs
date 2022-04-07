@@ -28,6 +28,10 @@ public class juicingMechanics : MonoBehaviour
 
     public GameObject refToClearButton;
 
+    public GameObject toolTip;
+
+    public GameObject AlertFlash;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,12 +39,25 @@ public class juicingMechanics : MonoBehaviour
     }
     private void OnEnable()
     {
-        int index = Random.Range(0, mashiNPUTS.Length);
-        playerRequiredInput = mashiNPUTS[index];
-        textMash.text = playerRequiredInput.ToString().ToUpper();
-        backgroundMash.SetActive(true);
+        if (currentDrink.LiquidBase == 0)
+        {
+            AlertFlash.GetComponent<FlashAlert>().StartAlert("Add Liquid First!", 0, 50);
+            this.gameObject.SetActive(false);
+            refToClearButton.gameObject.SetActive(false);
+        }
+        else {
+            int index = Random.Range(0, mashiNPUTS.Length);
+            playerRequiredInput = mashiNPUTS[index];
+            textMash.text = playerRequiredInput.ToString().ToUpper();
+            backgroundMash.SetActive(true);
 
-        moveCameraMash.canMove = false;
+            toolTip.SetActive(true);
+
+            moveCameraMash.canMove = false;
+
+            refToClearButton.gameObject.SetActive(true);
+        }
+        
 
     }
 
@@ -49,6 +66,7 @@ public class juicingMechanics : MonoBehaviour
         currentFill = 0;
         backgroundMash.SetActive(false);
         moveCameraMash.canMove = true;
+        toolTip.SetActive(false);
     }
 
     // Update is called once per frame

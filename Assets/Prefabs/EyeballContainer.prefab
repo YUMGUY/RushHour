@@ -156,7 +156,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 292056487509645962, guid: d1b486837a591dd4f9359eb810a09bcc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -205,6 +205,7 @@ MonoBehaviour:
   PrimaryID: Eyeball
   SecondaryID: Purple
   addedToDrink: 0
+  isBottle: 0
 --- !u!58 &3329341474330382706
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -377,10 +378,10 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 931997208277635427, guid: d1b486837a591dd4f9359eb810a09bcc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
@@ -426,6 +427,7 @@ MonoBehaviour:
   PrimaryID: Eyeball
   SecondaryID: Green
   addedToDrink: 0
+  isBottle: 0
 --- !u!58 &4981000905790032405
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -819,7 +821,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 8117530010530809563, guid: d1b486837a591dd4f9359eb810a09bcc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -868,6 +870,7 @@ MonoBehaviour:
   PrimaryID: Eyeball
   SecondaryID: Blue
   addedToDrink: 0
+  isBottle: 0
 --- !u!58 &6237047343497793772
 CircleCollider2D:
   m_ObjectHideFlags: 0

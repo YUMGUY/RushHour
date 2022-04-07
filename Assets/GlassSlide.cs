@@ -10,6 +10,10 @@ public class GlassSlide : MonoBehaviour
 
     public SpriteRenderer glass;
     public SpriteRenderer drink;
+
+    public GameObject currDrink;
+    public GameObject gameHandler;
+
     public bool atDestination;
     private float moveTimer = 0;
 
@@ -24,8 +28,8 @@ public class GlassSlide : MonoBehaviour
 
         originalPosition = this.transform;
         atDestination = true;
-        glass.enabled = false;
-        drink.enabled = false;
+        //glass.enabled = false;
+        //drink.enabled = false;
     }
 
     // Update is called once per frame
@@ -33,9 +37,11 @@ public class GlassSlide : MonoBehaviour
     {
         if (!atDestination)
         {
+            Debug.Log("Moving to dest");
             moveTimer += Time.deltaTime;
             this.transform.position = Vector2.Lerp(transform.position, destination.transform.position, moveTimer / duration);
-
+            Debug.Log(moveTimer);
+            
             if (moveTimer / duration >= .01) {
                 moveTimer = 0;
                 atDestination = true;
@@ -44,19 +50,25 @@ public class GlassSlide : MonoBehaviour
                 {
                     glassBreaking.Play();
                 }
-                glass.enabled = false;
-                drink.enabled = false;
+                //glass.enabled = false;
+                //drink.enabled = false;
+
+                currDrink.GetComponent<currDrink>().clearDrink();
                 resetPosition();
-                
+                gameHandler.GetComponent<GameHandler>().drinkPrimed = true;
             }
         }
     }
 
     public void setDestination(Transform destination)
     {
+        Debug.Log("Setting destination");
         this.destination = destination;
-        glass.enabled = true;
-        drink.enabled = true;
+        if (this.destination == destination) {
+            Debug.Log("Updated");
+        }
+        //glass.enabled = true;
+        //drink.enabled = true;
         atDestination = false;
     }
 

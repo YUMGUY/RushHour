@@ -9,6 +9,9 @@ public class currDrink : MonoBehaviour
     private List<GameObject> storedIngreds;
     private bool addedLiquid = false;
     public GameObject cameraRef;
+    public GameObject AlertFlash;
+    //private string alertTxt = "Default Alert";
+    //private Transform mainCanvas;
 
     [Header("LiquidObjs")]
     public GameObject LavaLiq;
@@ -51,6 +54,8 @@ public class currDrink : MonoBehaviour
     void Start()
     {
         storedIngreds = new List<GameObject>();
+        //alertTxt = AlertFlash.GetComponent<TMPro.TextMeshProUGUI>().text;
+        //mainCanvas = cameraRef.transform.FindChild("MainCanvas");
         //transform.GetChild(11).gameObject.SetActive(false);
     }
 
@@ -103,6 +108,10 @@ public class currDrink : MonoBehaviour
             switch (collision.GetComponent<Ingredient>().PrimaryID)
             {
                 case "Eyeball":
+                    if (LiquidBase == 0) {
+                        AlertFlash.GetComponent<FlashAlert>().StartAlert("Add Liquid First!", 0, 50);
+                        break;
+                    }
                     if (Eyeballs1 == 0)
                     {
                         switch (collision.GetComponent<Ingredient>().SecondaryID)
@@ -214,6 +223,11 @@ public class currDrink : MonoBehaviour
                     }
                     break;
                 case "Fruit":
+                    if (LiquidBase == 0)
+                    {
+                        AlertFlash.GetComponent<FlashAlert>().StartAlert("Add Liquid First!", 0, 50);
+                        break;
+                    }
                     if (Fruits == 0)
                     {
                         switch (collision.GetComponent<Ingredient>().SecondaryID)
@@ -253,11 +267,14 @@ public class currDrink : MonoBehaviour
                         Sprite sprite1 = FingerSprFront;
                         Sprite sprite2 = FingerSprBack;
 
-                        GameObject fingerFront = GameObject.Find("FingerSlot");
-                        fingerFront.GetComponent<SpriteRenderer>().sprite = sprite1;
+                        //GameObject fingerFront = GameObject.Find("FingerSlot");
+                        //fingerFront.GetComponent<SpriteRenderer>().sprite = FingerSprFront;
 
-                        GameObject fingerBack = GameObject.Find("BackOfFinger");
-                        fingerBack.GetComponent<SpriteRenderer>().sprite = sprite2; 
+                        transform.GetChild(8).GetComponent<SpriteRenderer>().sprite = FingerSprFront;
+                        transform.GetChild(8).GetChild(0).GetComponent<SpriteRenderer>().sprite = FingerSprBack;
+
+                        //GameObject fingerBack = GameObject.Find("BackOfFinger");
+                        //fingerBack.GetComponent<SpriteRenderer>().sprite = sprite2; 
                         
                     }
                     else
@@ -267,6 +284,11 @@ public class currDrink : MonoBehaviour
                     }
                     break;
                 case "Heart":
+                    if (LiquidBase == 0)
+                    {
+                        AlertFlash.GetComponent<FlashAlert>().StartAlert("Add Liquid First!", 0, 50);
+                        break;
+                    }
                     if (!Hearts)
                     {
                         Hearts = true;
@@ -398,7 +420,24 @@ public class currDrink : MonoBehaviour
             transform.GetChild(i).GetComponent<SpriteRenderer>().sprite = null;
 
         }
-        GameObject.Find("BackOfFinger").GetComponent<SpriteRenderer>().sprite = null;
+        transform.GetChild(8).GetChild(0).GetComponent<SpriteRenderer>().sprite = null;
     }
+    /*
+    IEnumerator FlashAlert(string messageTxt) {
+        Debug.Log("Started alert");
+        alertTxt = messageTxt;
+        //Instantiate(AlertFlash, mainCanvas); 
+        GameObject flash = Instantiate(AlertFlash, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+        //flash.transform.parent = mainCanvas;
+        //flash.transform.SetParent(mainCanvas, false);
+        //flash.transform.position = new Vector3(0,0,0);
+        Debug.Log(flash.transform.position.x);
+        Debug.Log(flash.transform.position.y);
+        yield return new WaitForSeconds(2);
+        //Destroy(flash);
+        yield break;
+    }*/
+
+
 
 }

@@ -35,6 +35,10 @@ public class shakingMechanic : MonoBehaviour
     public currDrink currentDrink;
 
     public GameObject refToClearButton;
+
+    public GameObject toolTip;
+
+    public GameObject AlertFlash;
     void Start()
     {
        
@@ -42,19 +46,32 @@ public class shakingMechanic : MonoBehaviour
 
     private void OnEnable()
     {
-        //StartCoroutine(flashRed());
-        shake = false;
-        int index = Random.Range(0, upShakeKey.Length);
-        playerShakeDown = downShakeKey[index];
-        playerShakeUp = upShakeKey[index];
-        currentDrink.shake.Play();
 
-        textup.text = playerShakeUp.ToString().ToUpper();
-        textdown.text = playerShakeDown.ToString().ToUpper();
-        shakingImage.SetActive(true);
+        if (currentDrink.LiquidBase == 0)
+        {
+            AlertFlash.GetComponent<FlashAlert>().StartAlert("Add Liquid First!", 0, 50);
+            this.gameObject.SetActive(false);
+            refToClearButton.gameObject.SetActive(false);
+        }
+        else {
+            //StartCoroutine(flashRed());
+            shake = false;
+            int index = Random.Range(0, upShakeKey.Length);
+            playerShakeDown = downShakeKey[index];
+            playerShakeUp = upShakeKey[index];
+            currentDrink.shake.Play();
 
+            textup.text = playerShakeUp.ToString().ToUpper();
+            textdown.text = playerShakeDown.ToString().ToUpper();
+            shakingImage.SetActive(true);
 
-        movingCamera.canMove = false;
+            toolTip.SetActive(true);
+
+            movingCamera.canMove = false;
+
+            refToClearButton.gameObject.SetActive(true);
+        }
+        
     }
 
     // enable player to press shift again
@@ -63,6 +80,7 @@ public class shakingMechanic : MonoBehaviour
         currentFillShake = 0;
         shakingImage.SetActive(false);
         movingCamera.canMove = true;
+        toolTip.SetActive(false);
     }
     // Update is called once per frame
     void Update()
