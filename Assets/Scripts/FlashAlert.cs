@@ -23,16 +23,17 @@ public class FlashAlert : MonoBehaviour
         
     }
 
-    public void StartAlert(string messageTxt, int x_offset, int y_offset) {
-        StartCoroutine(Alert(messageTxt, x_offset, y_offset));
+    public void StartAlert(string messageTxt, int x_offset, int y_offset, Vector3 screenPos, Color color) {
+        StartCoroutine(Alert(messageTxt, x_offset, y_offset, screenPos, color));
     }
 
-    IEnumerator Alert(string messageTxt, int x_offset, int y_offset)
+    IEnumerator Alert(string messageTxt, int x_offset, int y_offset, Vector3 screenPos, Color color)
     {
+        alertTxt.color = color;
         Debug.Log(messageTxt);
         alertTxt.text = messageTxt;
         //Instantiate(AlertFlash, mainCanvas); 
-        GameObject flash = Instantiate(AlertFlash, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+        GameObject flash = Instantiate(AlertFlash, screenPos, Quaternion.identity) as GameObject;
         //flash.transform.parent = mainCanvas;
         flash.transform.SetParent(alertParent.transform, false);
         alertParent.transform.localPosition = new Vector3(x_offset, y_offset, 0);

@@ -5,7 +5,7 @@ using UnityEngine;
 public class GlassSlide : MonoBehaviour
 {
     // Start is called before the first frame update
-    Transform destination;
+    public Transform destination;
     public Transform originalPosition;
 
     public SpriteRenderer glass;
@@ -39,10 +39,12 @@ public class GlassSlide : MonoBehaviour
         {
             Debug.Log("Moving to dest");
             moveTimer += Time.deltaTime;
-            this.transform.position = Vector2.Lerp(transform.position, destination.transform.position, moveTimer / duration);
-            Debug.Log(moveTimer);
-            
-            if (moveTimer / duration >= .01) {
+            this.transform.position = Vector2.Lerp(transform.position, destination.position, moveTimer / duration);
+            //Debug.Log(moveTimer);
+
+            //Debug.Log(transform.position.x - destination.position.x);
+
+            if (moveTimer / duration >= 0.1f || (transform.position.x - destination.position.x < 0.8f)) {
                 moveTimer = 0;
                 atDestination = true;
 
@@ -63,7 +65,11 @@ public class GlassSlide : MonoBehaviour
     public void setDestination(Transform destination)
     {
         Debug.Log("Setting destination");
+
         this.destination = destination;
+
+
+
         if (this.destination == destination) {
             Debug.Log("Updated");
         }
@@ -74,6 +80,6 @@ public class GlassSlide : MonoBehaviour
 
     public void resetPosition()
     {
-        this.transform.position = new Vector3(7, -.54f, 0);
+        this.transform.position = new Vector3(6.48f, -.54f, 0);
     }
 }

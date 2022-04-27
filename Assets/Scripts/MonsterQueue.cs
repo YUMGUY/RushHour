@@ -59,7 +59,7 @@ public class MonsterQueue : MonoBehaviour
     }
     */
 
-    public int getIrritationFactor(int index)
+    public float getIrritationFactor(int index)
     {
         return queue[index].getIrritationFactor();
     }

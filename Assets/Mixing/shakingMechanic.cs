@@ -49,7 +49,7 @@ public class shakingMechanic : MonoBehaviour
 
         if (currentDrink.LiquidBase == 0)
         {
-            AlertFlash.GetComponent<FlashAlert>().StartAlert("Add Liquid First!", 0, 50);
+            AlertFlash.GetComponent<FlashAlert>().StartAlert("Add Liquid First!", 0, 50, Vector3.zero, Color.green);
             this.gameObject.SetActive(false);
             refToClearButton.gameObject.SetActive(false);
         }

@@ -28,13 +28,38 @@ public class MonsterDrink : MonoBehaviour
     public MonsterDrink()
     {
 
+        GameHandler gameHandlerRef = FindObjectOfType<GameHandler>();
+        int currDifficultyLvl = gameHandlerRef.gameMode;
+
         // everything needs a liquor
         LiquidBase = Random.Range(1, 5);
         size++;
 
-        int orderSize = Random.Range(1, 5);
+        int orderSize = size;
 
-        while(size != orderSize)
+        if (currDifficultyLvl == 0)
+        {
+            orderSize = Random.Range(1, 2);
+            //Debug.Log("Should be on level 0");
+        }
+        else if (currDifficultyLvl == 1)
+        {
+            orderSize = Random.Range(1, 3);
+            //Debug.Log("Should be on level 1");
+        }
+        else if (currDifficultyLvl == 2)
+        {
+            orderSize = Random.Range(2, 4);
+            //Debug.Log("Should be on level 2");
+        }
+        else
+        {
+            orderSize = Random.Range(3, 5);
+            //Debug.Log("Should be on level 3");
+        }
+
+
+        while (size != orderSize)
         {
             int randomSelection = Random.Range(0, 6);
 

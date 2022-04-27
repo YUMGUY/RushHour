@@ -45,6 +45,8 @@ public class MoveCamera : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.LeftShift) && originalscene == true && cooldown <= 0)
             {
+                gameHandler.clearMinigameObjs();
+
                 moveToScene2 = true;
                 moveToScene1 = false;
                 gameHandler.talking.volume *= soundDampening;
@@ -71,6 +73,8 @@ public class MoveCamera : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.LeftShift) && !originalscene && cooldown <= 0)
             {
+                gameHandler.clearMinigameObjs();
+
                 moveToScene1 = true;
                 moveToScene2 = false;
 

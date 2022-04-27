@@ -13,6 +13,13 @@ public class DialogBox : MonoBehaviour
     public Sprite size4;
     public Sprite size5;
 
+    // Item slots for the dialog box
+    public GameObject Slot1;
+    public GameObject Slot2;
+    public GameObject Slot3;
+    public GameObject Slot4;
+    public GameObject Slot5;
+
     // List of SpriteRenderers representing the slots
     SpriteRenderer[] iconSlots;
 
@@ -72,18 +79,38 @@ public class DialogBox : MonoBehaviour
         if (drinkOrder.size == 2)
         {
             this.GetComponent<SpriteRenderer>().sprite = size2;
+            this.transform.position = new Vector3(transform.position.x, 0.78f, 0);
+            Slot1.transform.localPosition = new Vector3(Slot1.transform.localPosition.x, 1.84f, 0);
+            Slot2.transform.localPosition = new Vector3(Slot2.transform.localPosition.x, 3.52f, 0);
+
         }
         else if (drinkOrder.size == 3)
         {
             this.GetComponent<SpriteRenderer>().sprite = size3;
+            this.transform.position = new Vector3(transform.position.x, 0.78f, 0);
+            Slot1.transform.localPosition = new Vector3(Slot1.transform.localPosition.x, 1.28f, 0);
+            Slot2.transform.localPosition = new Vector3(Slot2.transform.localPosition.x, 2.92f, 0);
+            Slot3.transform.localPosition = new Vector3(Slot3.transform.localPosition.x, 4.69f, 0);
         }
         else if (drinkOrder.size == 4)
         {
             this.GetComponent<SpriteRenderer>().sprite = size4;
+            this.transform.position = new Vector3(transform.position.x, 0, 0);
+            Slot1.transform.localPosition = new Vector3(Slot1.transform.localPosition.x, 1.54f, 0);
+            Slot2.transform.localPosition = new Vector3(Slot2.transform.localPosition.x, 3.24f, 0);
+            Slot3.transform.localPosition = new Vector3(Slot3.transform.localPosition.x, 4.96f, 0);
+            Slot4.transform.localPosition = new Vector3(Slot4.transform.localPosition.x, 6.66f, 0);
         }
         else if (drinkOrder.size == 5)
         {
             this.GetComponent<SpriteRenderer>().sprite = size5;
+            this.transform.position = new Vector3(transform.position.x, -1.28f, 0);
+            Slot1.transform.localPosition = new Vector3(Slot1.transform.localPosition.x, 1.87f, 0);
+            Slot2.transform.localPosition = new Vector3(Slot2.transform.localPosition.x, 3.64f, 0);
+            Slot3.transform.localPosition = new Vector3(Slot3.transform.localPosition.x, 5.34f, 0);
+            Slot4.transform.localPosition = new Vector3(Slot4.transform.localPosition.x, 6.97f, 0);
+            Slot5.transform.localPosition = new Vector3(Slot5.transform.localPosition.x, 8.6f, 0);
+
         }
 
         // add icons

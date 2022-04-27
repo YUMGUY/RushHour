@@ -24,7 +24,7 @@ public class Monster : MonoBehaviour
 
     private float timeWaiting;
 
-    private int irritationFactor;
+    private float irritationFactor;
     public MonsterDrink monsterDrink;
     private bool movingAway;
     private float timer;
@@ -143,12 +143,12 @@ public class Monster : MonoBehaviour
         
     }
 
-    public int getIrritationFactor()
+    public float getIrritationFactor()
     {
         return irritationFactor;
     }
 
-    public void setIrritationFactor(int factor)
+    public void setIrritationFactor(float factor)
     {
         irritationFactor = factor;
     }

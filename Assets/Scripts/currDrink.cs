@@ -64,11 +64,11 @@ public class currDrink : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
-            Debug.Log("Holding Left Mouse Down");
-            cameraRef.GetComponent<MoveCamera>().canMove = false;
+            //Debug.Log("Holding Left Mouse Down");
+            //cameraRef.GetComponent<MoveCamera>().canMove = false;
         }
         if (Input.GetMouseButtonUp(0)) {
-            cameraRef.GetComponent<MoveCamera>().canMove = true;
+            //cameraRef.GetComponent<MoveCamera>().canMove = true;
             foreach (GameObject storedIngred in storedIngreds)
             {
                 Destroy(storedIngred.gameObject);
@@ -109,7 +109,7 @@ public class currDrink : MonoBehaviour
             {
                 case "Eyeball":
                     if (LiquidBase == 0) {
-                        AlertFlash.GetComponent<FlashAlert>().StartAlert("Add Liquid First!", 0, 50);
+                        AlertFlash.GetComponent<FlashAlert>().StartAlert("Add Liquid First!", 0, 50, Vector3.zero, Color.green);
                         break;
                     }
                     if (Eyeballs1 == 0)
@@ -225,7 +225,7 @@ public class currDrink : MonoBehaviour
                 case "Fruit":
                     if (LiquidBase == 0)
                     {
-                        AlertFlash.GetComponent<FlashAlert>().StartAlert("Add Liquid First!", 0, 50);
+                        AlertFlash.GetComponent<FlashAlert>().StartAlert("Add Liquid First!", 0, 50, Vector3.zero, Color.green);
                         break;
                     }
                     if (Fruits == 0)
@@ -286,7 +286,7 @@ public class currDrink : MonoBehaviour
                 case "Heart":
                     if (LiquidBase == 0)
                     {
-                        AlertFlash.GetComponent<FlashAlert>().StartAlert("Add Liquid First!", 0, 50);
+                        AlertFlash.GetComponent<FlashAlert>().StartAlert("Add Liquid First!", 0, 50, Vector3.zero, Color.green);
                         break;
                     }
                     if (!Hearts)
@@ -421,6 +421,9 @@ public class currDrink : MonoBehaviour
 
         }
         transform.GetChild(8).GetChild(0).GetComponent<SpriteRenderer>().sprite = null;
+
+
+
     }
     /*
     IEnumerator FlashAlert(string messageTxt) {
