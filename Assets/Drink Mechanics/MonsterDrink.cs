@@ -28,34 +28,40 @@ public class MonsterDrink : MonoBehaviour
     public MonsterDrink()
     {
 
+    }
+
+    public void Awake()
+    {
         // everything needs a liquor
         LiquidBase = Random.Range(1, 5);
         size++;
 
         int orderSize = Random.Range(1, 5);
 
-        while(size != orderSize)
+        while (size != orderSize)
         {
             int randomSelection = Random.Range(0, 6);
 
-            if(randomSelection == 0)
+            if (randomSelection == 0)
             {
-                if(Eyeballs1 == 0)
+                if (Eyeballs1 == 0)
                 {
                     Eyeballs1 = Random.Range(1, 4);
                     size++;
-                } else if(Eyeballs2 == 0)
+                }
+                else if (Eyeballs2 == 0)
                 {
                     Eyeballs2 = Random.Range(1, 4);
                     size++;
-                } else
+                }
+                else
                 {
                     Eyeballs3 = Random.Range(0, 4);
                     size++;
                 }
             }
 
-            else if(randomSelection == 1 && Gemstones == 0)
+            else if (randomSelection == 1 && Gemstones == 0)
             {
                 Gemstones = Random.Range(1, 4);
                 size++;
@@ -87,7 +93,7 @@ public class MonsterDrink : MonoBehaviour
         }
 
         int mixingMethod = Random.Range(0, 3);
-        switch(mixingMethod)
+        switch (mixingMethod)
         {
             case 0:
                 this.hasBeenStirred = true;

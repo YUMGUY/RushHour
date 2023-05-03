@@ -221,7 +221,8 @@ public class GameHandler : MonoBehaviour
         {
             monster.setIrritationFactor(2);
         }
-        monster.setMonsterDrink(new MonsterDrink());
+       
+        monster.setMonsterDrink(gameObject.AddComponent<MonsterDrink>());
         return monster;
     }
 
